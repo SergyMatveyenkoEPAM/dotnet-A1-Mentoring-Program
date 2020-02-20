@@ -1,0 +1,104 @@
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Packages #
+############
+# it's better to unpack these files and commit the raw source
+# git has its own built in compression methods
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+
+# Logs and databases #
+######################
+*.log
+#*.sql
+*.sqlite
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+
+# Visual studio #
+#################
+*.csproj.user
+*.user
+*.suo
+_ReSharper.*/
+bin/
+obj/
+.vs/
+
+# Visual studio code #
+######################
+.vscode/
+
+# SonarLint #
+#############
+.sonarlint/
+
+# idea #
+.idea/
+
+# Project
+/src/*/*/*.properties
+output.sql
+
+#Office temorary files
+*.~vsd
+*.ldb
+/src/Rd.Web/hibernate.cfg.xml
+/src/Rd.Tests/hibernate.cfg.xml
+/lib/NHibernate.3.3.2.4000/lib/.gitignore
+/lib/NHibernate.3.3.2.4000/lib/Net35/NHibernate.xml
+lib/NUnitTestAdapter.2.0.0/
+src/.localhistory
+
+/src/Rd.Web/node_modules
+
+*.GhostDoc.xml
+
+# Resourses #
+#############
+src/Rd.Core/Data/RavenDB/RavenRepository.cs.orig
+StyleCop.Cache
+# Visual Studio cache files
+# files ending in .cache can be ignored
+*.[Cc]ache
+# but keep track of directories ending in .cache
+!*.[Cc]ache/
+
+# RiderC #
+.idea/
+*.*.iml
+*.psess
+*.vspx
+
+# Coverage UI tests #
+#####################
+src/Rd.Web/Scripts/Tests/Coverage/
+/src/Rd.Web/sitemap.xml
+/src/Rd.Web/sitemap_am.xml
+/src/Rd.Web/sitemap_by.xml
+/src/Rd.Web/sitemap_kz.xml
+/src/Rd.Web/sitemap_ru.xml
+/src/Rd.Web/sitemap_ua.xml
