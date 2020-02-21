@@ -1,8 +1,9 @@
 ﻿using Android.App;
 using Android.OS;
-using Android.Support.V7.App;
 using Android.Runtime;
+using Android.Support.V7.App;
 using Android.Widget;
+using HelloLibrary;
 using System;
 
 namespace HelloAndroid
@@ -28,7 +29,8 @@ namespace HelloAndroid
 
         private void ShowGreeting(object sender, EventArgs e)
         {
-            tv2.Text = $"Hello, {et1.Text}!";
+            // tv2.Text = $"Hello, {et1.Text}!";
+            tv2.Text = Greeting.Hello(et1.Text);
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)

@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using HelloLibrary;
+using System;
+using System.Linq;
 
 namespace HelloConsole
 {
@@ -9,7 +11,8 @@ namespace HelloConsole
             if (args.Any())
             {
                 string name = args[0];
-                System.Console.WriteLine($"Hello, {name}!");
+                // Console.WriteLine($"Hello, {name}!");
+                Console.WriteLine(Greeting.Hello(name));
             }
         }
     }

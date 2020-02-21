@@ -1,32 +1,51 @@
 {
   "version": 3,
   "targets": {
-    ".NETCoreApp,Version=v3.1": {}
+    ".NETCoreApp,Version=v3.1": {
+      "HelloLibrary/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/HelloLibrary.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/HelloLibrary.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "HelloLibrary/1.0.0": {
+      "type": "project",
+      "path": "../HelloLibrary/HelloLibrary.csproj",
+      "msbuildProject": "../HelloLibrary/HelloLibrary.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    ".NETCoreApp,Version=v3.1": []
+    ".NETCoreApp,Version=v3.1": [
+      "HelloLibrary >= 1.0.0"
+    ]
   },
   "packageFolders": {
-    "C:\\Users\\Siarhei_Matveyenka\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {},
+    "C:\\Users\\User\\.nuget\\packages\\": {},
+    "E:\\Microsoft\\Xamarin\\NuGet\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\A1 Mentoring Program\\01_Introduction\\Hello\\HelloConsole\\HelloConsole.csproj",
+      "projectUniqueName": "e:\\EPAM\\dotnet-A1-Mentoring-Program\\01_Introduction\\Hello\\HelloConsole\\HelloConsole.csproj",
       "projectName": "HelloConsole",
-      "projectPath": "D:\\A1 Mentoring Program\\01_Introduction\\Hello\\HelloConsole\\HelloConsole.csproj",
-      "packagesPath": "C:\\Users\\Siarhei_Matveyenka\\.nuget\\packages\\",
-      "outputPath": "D:\\A1 Mentoring Program\\01_Introduction\\Hello\\HelloConsole\\obj\\",
+      "projectPath": "e:\\EPAM\\dotnet-A1-Mentoring-Program\\01_Introduction\\Hello\\HelloConsole\\HelloConsole.csproj",
+      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+      "outputPath": "e:\\EPAM\\dotnet-A1-Mentoring-Program\\01_Introduction\\Hello\\HelloConsole\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\",
+        "E:\\Microsoft\\Xamarin\\NuGet\\",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Siarhei_Matveyenka\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
@@ -39,7 +58,11 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "projectReferences": {}
+          "projectReferences": {
+            "e:\\EPAM\\dotnet-A1-Mentoring-Program\\01_Introduction\\Hello\\HelloLibrary\\HelloLibrary.csproj": {
+              "projectPath": "e:\\EPAM\\dotnet-A1-Mentoring-Program\\01_Introduction\\Hello\\HelloLibrary\\HelloLibrary.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

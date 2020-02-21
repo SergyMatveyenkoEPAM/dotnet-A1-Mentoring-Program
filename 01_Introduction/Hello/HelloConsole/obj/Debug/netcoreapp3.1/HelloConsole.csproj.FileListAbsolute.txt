@@ -9,3 +9,17 @@ D:\A1 Mentoring Program\01_Introduction\Hello\HelloConsole\obj\Debug\netcoreapp3
 D:\A1 Mentoring Program\01_Introduction\Hello\HelloConsole\obj\Debug\netcoreapp3.1\HelloConsole.AssemblyInfo.cs
 D:\A1 Mentoring Program\01_Introduction\Hello\HelloConsole\obj\Debug\netcoreapp3.1\HelloConsole.dll
 D:\A1 Mentoring Program\01_Introduction\Hello\HelloConsole\obj\Debug\netcoreapp3.1\HelloConsole.pdb
+e:\EPAM\dotnet-A1-Mentoring-Program\01_Introduction\Hello\HelloConsole\bin\Debug\netcoreapp3.1\HelloConsole.exe
+e:\EPAM\dotnet-A1-Mentoring-Program\01_Introduction\Hello\HelloConsole\bin\Debug\netcoreapp3.1\HelloConsole.deps.json
+e:\EPAM\dotnet-A1-Mentoring-Program\01_Introduction\Hello\HelloConsole\bin\Debug\netcoreapp3.1\HelloConsole.runtimeconfig.json
+e:\EPAM\dotnet-A1-Mentoring-Program\01_Introduction\Hello\HelloConsole\bin\Debug\netcoreapp3.1\HelloConsole.runtimeconfig.dev.json
+e:\EPAM\dotnet-A1-Mentoring-Program\01_Introduction\Hello\HelloConsole\bin\Debug\netcoreapp3.1\HelloConsole.dll
+e:\EPAM\dotnet-A1-Mentoring-Program\01_Introduction\Hello\HelloConsole\bin\Debug\netcoreapp3.1\HelloConsole.pdb
+e:\EPAM\dotnet-A1-Mentoring-Program\01_Introduction\Hello\HelloConsole\obj\Debug\netcoreapp3.1\HelloConsole.csprojAssemblyReference.cache
+e:\EPAM\dotnet-A1-Mentoring-Program\01_Introduction\Hello\HelloConsole\obj\Debug\netcoreapp3.1\HelloConsole.AssemblyInfoInputs.cache
+e:\EPAM\dotnet-A1-Mentoring-Program\01_Introduction\Hello\HelloConsole\obj\Debug\netcoreapp3.1\HelloConsole.AssemblyInfo.cs
+e:\EPAM\dotnet-A1-Mentoring-Program\01_Introduction\Hello\HelloConsole\obj\Debug\netcoreapp3.1\HelloConsole.dll
+e:\EPAM\dotnet-A1-Mentoring-Program\01_Introduction\Hello\HelloConsole\obj\Debug\netcoreapp3.1\HelloConsole.pdb
+e:\EPAM\dotnet-A1-Mentoring-Program\01_Introduction\Hello\HelloConsole\bin\Debug\netcoreapp3.1\HelloLibrary.dll
+e:\EPAM\dotnet-A1-Mentoring-Program\01_Introduction\Hello\HelloConsole\bin\Debug\netcoreapp3.1\HelloLibrary.pdb
+e:\EPAM\dotnet-A1-Mentoring-Program\01_Introduction\Hello\HelloConsole\obj\Debug\netcoreapp3.1\HelloConsole.csproj.CopyComplete

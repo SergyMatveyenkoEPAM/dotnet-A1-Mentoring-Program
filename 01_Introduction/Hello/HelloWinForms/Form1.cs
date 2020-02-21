@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HelloLibrary;
+using System;
 using System.Windows.Forms;
 
 namespace HelloWinForms
@@ -12,17 +13,13 @@ namespace HelloWinForms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"Hello, {textBox1.Text}!", "Hello", MessageBoxButtons.OK);
+            // MessageBox.Show($"Hello, {textBox1.Text}!", "Hello", MessageBoxButtons.OK);
+            MessageBox.Show(Greeting.Hello(textBox1.Text), "Hello", MessageBoxButtons.OK);
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(textBox1.Text))
-                button1.Enabled = false;
-            else
-            {
-                button1.Enabled = true;
-            }
+            button1.Enabled = !string.IsNullOrEmpty(textBox1.Text);
         }
     }
 }
