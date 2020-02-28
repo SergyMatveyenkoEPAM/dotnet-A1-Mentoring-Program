@@ -1,0 +1,9 @@
+D:\A1 Mentoring Program\01_Introduction\Hello\HelloWinForms\bin\Release\HelloWinForms.exe.config
+D:\A1 Mentoring Program\01_Introduction\Hello\HelloWinForms\bin\Release\HelloWinForms.exe
+D:\A1 Mentoring Program\01_Introduction\Hello\HelloWinForms\bin\Release\HelloWinForms.pdb
+D:\A1 Mentoring Program\01_Introduction\Hello\HelloWinForms\obj\Release\HelloWinForms.csprojAssemblyReference.cache
+D:\A1 Mentoring Program\01_Introduction\Hello\HelloWinForms\obj\Release\HelloWinForms.Form1.resources
+D:\A1 Mentoring Program\01_Introduction\Hello\HelloWinForms\obj\Release\HelloWinForms.Properties.Resources.resources
+D:\A1 Mentoring Program\01_Introduction\Hello\HelloWinForms\obj\Release\HelloWinForms.csproj.GenerateResource.cache
+D:\A1 Mentoring Program\01_Introduction\Hello\HelloWinForms\obj\Release\HelloWinForms.exe
+D:\A1 Mentoring Program\01_Introduction\Hello\HelloWinForms\obj\Release\HelloWinForms.pdb

@@ -1,0 +1,8 @@
+D:\A1 Mentoring Program\01_Introduction\RoslynWeb\StyleCopLibrary\bin\Debug\netstandard2.0\StyleCopLibrary.deps.json
+D:\A1 Mentoring Program\01_Introduction\RoslynWeb\StyleCopLibrary\bin\Debug\netstandard2.0\StyleCopLibrary.dll
+D:\A1 Mentoring Program\01_Introduction\RoslynWeb\StyleCopLibrary\obj\Debug\netstandard2.0\StyleCopLibrary.csprojAssemblyReference.cache
+D:\A1 Mentoring Program\01_Introduction\RoslynWeb\StyleCopLibrary\obj\Debug\netstandard2.0\StyleCopLibrary.AssemblyInfoInputs.cache
+D:\A1 Mentoring Program\01_Introduction\RoslynWeb\StyleCopLibrary\obj\Debug\netstandard2.0\StyleCopLibrary.AssemblyInfo.cs
+D:\A1 Mentoring Program\01_Introduction\RoslynWeb\StyleCopLibrary\bin\Debug\netstandard2.0\StyleCopLibrary.pdb
+D:\A1 Mentoring Program\01_Introduction\RoslynWeb\StyleCopLibrary\obj\Debug\netstandard2.0\StyleCopLibrary.dll
+D:\A1 Mentoring Program\01_Introduction\RoslynWeb\StyleCopLibrary\obj\Debug\netstandard2.0\StyleCopLibrary.pdb

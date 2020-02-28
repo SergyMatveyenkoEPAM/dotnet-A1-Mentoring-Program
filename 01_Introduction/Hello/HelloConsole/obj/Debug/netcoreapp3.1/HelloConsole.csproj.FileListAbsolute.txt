@@ -1,0 +1,14 @@
+d:\A1 Mentoring Program\01_Introduction\Hello\HelloConsole\bin\Debug\netcoreapp3.1\HelloConsole.exe
+d:\A1 Mentoring Program\01_Introduction\Hello\HelloConsole\bin\Debug\netcoreapp3.1\HelloConsole.deps.json
+d:\A1 Mentoring Program\01_Introduction\Hello\HelloConsole\bin\Debug\netcoreapp3.1\HelloConsole.runtimeconfig.json
+d:\A1 Mentoring Program\01_Introduction\Hello\HelloConsole\bin\Debug\netcoreapp3.1\HelloConsole.runtimeconfig.dev.json
+d:\A1 Mentoring Program\01_Introduction\Hello\HelloConsole\bin\Debug\netcoreapp3.1\HelloConsole.dll
+d:\A1 Mentoring Program\01_Introduction\Hello\HelloConsole\bin\Debug\netcoreapp3.1\HelloConsole.pdb
+d:\A1 Mentoring Program\01_Introduction\Hello\HelloConsole\bin\Debug\netcoreapp3.1\HelloLibrary.dll
+d:\A1 Mentoring Program\01_Introduction\Hello\HelloConsole\bin\Debug\netcoreapp3.1\HelloLibrary.pdb
+d:\A1 Mentoring Program\01_Introduction\Hello\HelloConsole\obj\Debug\netcoreapp3.1\HelloConsole.csprojAssemblyReference.cache
+d:\A1 Mentoring Program\01_Introduction\Hello\HelloConsole\obj\Debug\netcoreapp3.1\HelloConsole.AssemblyInfoInputs.cache
+d:\A1 Mentoring Program\01_Introduction\Hello\HelloConsole\obj\Debug\netcoreapp3.1\HelloConsole.AssemblyInfo.cs
+d:\A1 Mentoring Program\01_Introduction\Hello\HelloConsole\obj\Debug\netcoreapp3.1\HelloConsole.csproj.CopyComplete
+d:\A1 Mentoring Program\01_Introduction\Hello\HelloConsole\obj\Debug\netcoreapp3.1\HelloConsole.dll
+d:\A1 Mentoring Program\01_Introduction\Hello\HelloConsole\obj\Debug\netcoreapp3.1\HelloConsole.pdb
