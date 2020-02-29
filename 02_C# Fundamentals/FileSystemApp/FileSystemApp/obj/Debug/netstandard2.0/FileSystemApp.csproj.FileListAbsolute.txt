@@ -6,3 +6,11 @@ D:\A1 Mentoring Program\02_C# Fundamentals\FileSystemApp\FileSystemApp\bin\Debug
 D:\A1 Mentoring Program\02_C# Fundamentals\FileSystemApp\FileSystemApp\bin\Debug\netstandard2.0\FileSystemApp.pdb
 D:\A1 Mentoring Program\02_C# Fundamentals\FileSystemApp\FileSystemApp\obj\Debug\netstandard2.0\FileSystemApp.dll
 D:\A1 Mentoring Program\02_C# Fundamentals\FileSystemApp\FileSystemApp\obj\Debug\netstandard2.0\FileSystemApp.pdb
+e:\EPAM\dotnet-A1-Mentoring-Program\02_C# Fundamentals\FileSystemApp\FileSystemApp\obj\Debug\netstandard2.0\FileSystemApp.csprojAssemblyReference.cache
+e:\EPAM\dotnet-A1-Mentoring-Program\02_C# Fundamentals\FileSystemApp\FileSystemApp\obj\Debug\netstandard2.0\FileSystemApp.AssemblyInfoInputs.cache
+e:\EPAM\dotnet-A1-Mentoring-Program\02_C# Fundamentals\FileSystemApp\FileSystemApp\obj\Debug\netstandard2.0\FileSystemApp.AssemblyInfo.cs
+e:\EPAM\dotnet-A1-Mentoring-Program\02_C# Fundamentals\FileSystemApp\FileSystemApp\obj\Debug\netstandard2.0\FileSystemApp.dll
+e:\EPAM\dotnet-A1-Mentoring-Program\02_C# Fundamentals\FileSystemApp\FileSystemApp\obj\Debug\netstandard2.0\FileSystemApp.pdb
+e:\EPAM\dotnet-A1-Mentoring-Program\02_C# Fundamentals\FileSystemApp\FileSystemApp\bin\Debug\netstandard2.0\FileSystemApp.deps.json
+e:\EPAM\dotnet-A1-Mentoring-Program\02_C# Fundamentals\FileSystemApp\FileSystemApp\bin\Debug\netstandard2.0\FileSystemApp.dll
+e:\EPAM\dotnet-A1-Mentoring-Program\02_C# Fundamentals\FileSystemApp\FileSystemApp\bin\Debug\netstandard2.0\FileSystemApp.pdb

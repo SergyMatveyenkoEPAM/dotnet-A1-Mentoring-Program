@@ -1,9 +1,7 @@
-﻿using System;
+﻿using FileSystemApp;
+using System;
 using System.IO;
 using System.Linq;
-using System.Threading;
-using System.Threading.Channels;
-using FileSystemApp;
 
 namespace ConsoleFileSystem
 {
@@ -11,7 +9,7 @@ namespace ConsoleFileSystem
     {
         static void Main(string[] args)
         {
-            string startDirectory = @"d:\A1 Mentoring Program\02_C# Fundamentals\FileSystemApp\ConsoleFileSystem\";
+            string startDirectory = @"e:\EPAM\dotnet-A1-Mentoring-Program\02_C# Fundamentals\FileSystemApp\ConsoleFileSystem\";
 
             FileSystemVisitor fileSystemVisitor = new FileSystemVisitor(address => !address.Contains("Debug"));
 
@@ -21,6 +19,11 @@ namespace ConsoleFileSystem
             fileSystemVisitor.FilteredDirectoryFound += message => Console.WriteLine(message);
             fileSystemVisitor.FileFound += message => Console.WriteLine(message);
             fileSystemVisitor.FilteredFileFound += message => Console.WriteLine(message);
+            fileSystemVisitor.Enough += TerminateSearching;
+
+            // let's take 5 entities
+            RecipientEventArgs recipient = new RecipientEventArgs(quantityWeNeed: 5);
+           
 
             if (string.IsNullOrEmpty(startDirectory) || !Directory.Exists(startDirectory))
             {
@@ -30,7 +33,7 @@ namespace ConsoleFileSystem
             // without ".ToList()" we can not get the correct order of notification
             var results = fileSystemVisitor.GetAllFoldersAndFiles(startDirectory).ToList();
             
-            Console.WriteLine("Searching results:");
+            Console.WriteLine("\nSearching results:");
 
             foreach (var item in results)
             {
@@ -38,6 +41,11 @@ namespace ConsoleFileSystem
             }
 
             Console.ReadKey();
+        }
+
+        static void TerminateSearching(object sender, RecipientEventArgs e)
+        {
+            
         }
     }
 }

@@ -22,7 +22,8 @@ namespace FileSystemApp
         public event FilteredFileFound FilteredFileFound;
         public event DirectoryFound DirectoryFound;
         public event FilteredDirectoryFound FilteredDirectoryFound;
-        
+        public event EventHandler<RecipientEventArgs> Enough;
+
         public Predicate<string> Filter { get; set; }
 
         public FileSystemVisitor()
@@ -54,46 +55,10 @@ namespace FileSystemApp
 
         private IEnumerable<string> FindEntities(string startAddress)
         {
-            var directories = Directory.GetDirectories(startAddress).Where(d =>
-            {
-                DirectoryFound?.Invoke("Directory was found: " + Path.GetFileName(d));
-
-                if (Filter != null)
-                {
-                    if (Filter(d))
-                    {
-                        FilteredDirectoryFound?.Invoke("Filtered directory was found: " + Path.GetFileName(d));
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-
-                return true;
-                // without ".ToList()" messages appears twice
-            }).ToList();
-
-            var files = Directory.GetFiles(startAddress).Where(f =>
-            {
-                FileFound?.Invoke("File was found: " + Path.GetFileName(f));
-
-                if (Filter != null)
-                {
-                    if (Filter(f))
-                    {
-                        FilteredFileFound?.Invoke("Filtered file was found: " + Path.GetFileName(f));
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-
-                return true;
-                // without ".ToList()" messages appears twice
-            }).ToList();
-
+            var directories = GetDirectories(startAddress).ToList();
+            
+            var files = GetFiles(startAddress).ToList();            
+            
             var entityes = directories.Concat(files).AsEnumerable();
 
             foreach (var directory in directories)
@@ -104,9 +69,50 @@ namespace FileSystemApp
             return entityes;
         }
 
-        //private IEnumerable<string> GetDirectories(string startAddress)
-        //{
+        private IEnumerable<string> GetDirectories(string startAddress)
+        {
+            var directories = Directory.GetDirectories(startAddress);
 
-        //}
+            foreach (var item in directories)
+            {
+                DirectoryFound?.Invoke("Directory was found: " + Path.GetFileName(item));
+
+                if (Filter != null)
+                {
+                    if (Filter(item))
+                    {
+                        FilteredDirectoryFound?.Invoke("Filtered directory was found: " + Path.GetFileName(item));
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+                yield return item;
+            }
+        }
+
+        private IEnumerable<string> GetFiles(string startAddress)
+        {
+            var files = Directory.GetFiles(startAddress);
+
+            foreach (var item in files)
+            {
+                FileFound?.Invoke("File was found: " + Path.GetFileName(item));
+
+                if (Filter != null)
+                {
+                    if (Filter(item))
+                    {
+                        FilteredFileFound?.Invoke("Filtered file was found: " + Path.GetFileName(item));
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+                yield return item;
+            }
+        }
     }
 }
