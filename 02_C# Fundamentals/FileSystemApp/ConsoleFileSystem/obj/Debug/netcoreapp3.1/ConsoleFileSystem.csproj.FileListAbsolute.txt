@@ -18,11 +18,11 @@ e:\EPAM\dotnet-A1-Mentoring-Program\02_C# Fundamentals\FileSystemApp\ConsoleFile
 e:\EPAM\dotnet-A1-Mentoring-Program\02_C# Fundamentals\FileSystemApp\ConsoleFileSystem\bin\Debug\netcoreapp3.1\ConsoleFileSystem.runtimeconfig.dev.json
 e:\EPAM\dotnet-A1-Mentoring-Program\02_C# Fundamentals\FileSystemApp\ConsoleFileSystem\bin\Debug\netcoreapp3.1\ConsoleFileSystem.dll
 e:\EPAM\dotnet-A1-Mentoring-Program\02_C# Fundamentals\FileSystemApp\ConsoleFileSystem\bin\Debug\netcoreapp3.1\ConsoleFileSystem.pdb
-e:\EPAM\dotnet-A1-Mentoring-Program\02_C# Fundamentals\FileSystemApp\ConsoleFileSystem\bin\Debug\netcoreapp3.1\FileSystemApp.dll
-e:\EPAM\dotnet-A1-Mentoring-Program\02_C# Fundamentals\FileSystemApp\ConsoleFileSystem\bin\Debug\netcoreapp3.1\FileSystemApp.pdb
 e:\EPAM\dotnet-A1-Mentoring-Program\02_C# Fundamentals\FileSystemApp\ConsoleFileSystem\obj\Debug\netcoreapp3.1\ConsoleFileSystem.csprojAssemblyReference.cache
 e:\EPAM\dotnet-A1-Mentoring-Program\02_C# Fundamentals\FileSystemApp\ConsoleFileSystem\obj\Debug\netcoreapp3.1\ConsoleFileSystem.AssemblyInfoInputs.cache
 e:\EPAM\dotnet-A1-Mentoring-Program\02_C# Fundamentals\FileSystemApp\ConsoleFileSystem\obj\Debug\netcoreapp3.1\ConsoleFileSystem.AssemblyInfo.cs
 e:\EPAM\dotnet-A1-Mentoring-Program\02_C# Fundamentals\FileSystemApp\ConsoleFileSystem\obj\Debug\netcoreapp3.1\ConsoleFileSystem.csproj.CopyComplete
 e:\EPAM\dotnet-A1-Mentoring-Program\02_C# Fundamentals\FileSystemApp\ConsoleFileSystem\obj\Debug\netcoreapp3.1\ConsoleFileSystem.dll
 e:\EPAM\dotnet-A1-Mentoring-Program\02_C# Fundamentals\FileSystemApp\ConsoleFileSystem\obj\Debug\netcoreapp3.1\ConsoleFileSystem.pdb
+E:\EPAM\dotnet-A1-Mentoring-Program\02_C# Fundamentals\FileSystemApp\ConsoleFileSystem\bin\Debug\netcoreapp3.1\FileSystemAppLibrary.dll
+E:\EPAM\dotnet-A1-Mentoring-Program\02_C# Fundamentals\FileSystemApp\ConsoleFileSystem\bin\Debug\netcoreapp3.1\FileSystemAppLibrary.pdb

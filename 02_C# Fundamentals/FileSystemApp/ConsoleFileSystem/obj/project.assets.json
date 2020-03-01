@@ -2,28 +2,28 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v3.1": {
-      "FileSystemApp/1.0.0": {
+      "FileSystemAppLibrary/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "compile": {
-          "bin/placeholder/FileSystemApp.dll": {}
+          "bin/placeholder/FileSystemAppLibrary.dll": {}
         },
         "runtime": {
-          "bin/placeholder/FileSystemApp.dll": {}
+          "bin/placeholder/FileSystemAppLibrary.dll": {}
         }
       }
     }
   },
   "libraries": {
-    "FileSystemApp/1.0.0": {
+    "FileSystemAppLibrary/1.0.0": {
       "type": "project",
-      "path": "../FileSystemApp/FileSystemApp.csproj",
-      "msbuildProject": "../FileSystemApp/FileSystemApp.csproj"
+      "path": "../FileSystemApp/FileSystemAppLibrary.csproj",
+      "msbuildProject": "../FileSystemApp/FileSystemAppLibrary.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
-      "FileSystemApp >= 1.0.0"
+      "FileSystemAppLibrary >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -34,11 +34,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "e:\\EPAM\\dotnet-A1-Mentoring-Program\\02_C# Fundamentals\\FileSystemApp\\ConsoleFileSystem\\ConsoleFileSystem.csproj",
+      "projectUniqueName": "E:\\EPAM\\dotnet-A1-Mentoring-Program\\02_C# Fundamentals\\FileSystemApp\\ConsoleFileSystem\\ConsoleFileSystem.csproj",
       "projectName": "ConsoleFileSystem",
-      "projectPath": "e:\\EPAM\\dotnet-A1-Mentoring-Program\\02_C# Fundamentals\\FileSystemApp\\ConsoleFileSystem\\ConsoleFileSystem.csproj",
+      "projectPath": "E:\\EPAM\\dotnet-A1-Mentoring-Program\\02_C# Fundamentals\\FileSystemApp\\ConsoleFileSystem\\ConsoleFileSystem.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "e:\\EPAM\\dotnet-A1-Mentoring-Program\\02_C# Fundamentals\\FileSystemApp\\ConsoleFileSystem\\obj\\",
+      "outputPath": "E:\\EPAM\\dotnet-A1-Mentoring-Program\\02_C# Fundamentals\\FileSystemApp\\ConsoleFileSystem\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "E:\\Microsoft\\Xamarin\\NuGet\\",
@@ -59,8 +59,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "e:\\EPAM\\dotnet-A1-Mentoring-Program\\02_C# Fundamentals\\FileSystemApp\\FileSystemApp\\FileSystemApp.csproj": {
-              "projectPath": "e:\\EPAM\\dotnet-A1-Mentoring-Program\\02_C# Fundamentals\\FileSystemApp\\FileSystemApp\\FileSystemApp.csproj"
+            "E:\\EPAM\\dotnet-A1-Mentoring-Program\\02_C# Fundamentals\\FileSystemApp\\FileSystemApp\\FileSystemAppLibrary.csproj": {
+              "projectPath": "E:\\EPAM\\dotnet-A1-Mentoring-Program\\02_C# Fundamentals\\FileSystemApp\\FileSystemApp\\FileSystemAppLibrary.csproj"
             }
           }
         }

@@ -2,27 +2,41 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 
-namespace FileSystemApp
+namespace FileSystemAppLibrary
 {
-    public delegate void StartMessage(string message);
-    public delegate void EndMessage(string message);
-    public delegate void FileFound(string message);
-    public delegate void FilteredFileFound(string message);
-    public delegate void DirectoryFound(string message);
-    public delegate void FilteredDirectoryFound(string message);
-
     public class FileSystemVisitor
     {
-        public event StartMessage StartMessage;
-        public event EndMessage EndMessage;
-        public event FileFound FileFound;
-        public event FilteredFileFound FilteredFileFound;
-        public event DirectoryFound DirectoryFound;
-        public event FilteredDirectoryFound FilteredDirectoryFound;
-        public event EventHandler<RecipientEventArgs> Enough;
+        public int NumberOfDirectories { get; set; }
+        public int NumberOfFilteredDirectories { get; set; }
+        public int NumberOfFiles { get; set; }
+        public int NumberOfFilteredFiles { get; set; }
+
+        bool includeDirectory;
+        bool includeFile;
+
+        public event EventHandler<OutputMessageEventArgs> StartMessage;
+        public void StartMessageFire()
+        {
+            StartMessage?.Invoke(this, new OutputMessageEventArgs
+            {
+                Message = "-------------Searching was started-------------"
+            });
+        }
+
+        public event EventHandler<OutputMessageEventArgs> EndMessage;
+        public void EndMessageFire()
+        {
+            EndMessage?.Invoke(this, new OutputMessageEventArgs
+            {
+                Message = "-------------Searching was finished-------------"
+            });
+        }
+
+        public event EventHandler<OutputMessageEventArgs> FileFound;
+        public event EventHandler<OutputMessageEventArgs> FilteredFileFound;
+        public event EventHandler<OutputMessageEventArgs> DirectoryFound;
+        public event EventHandler<OutputMessageEventArgs> FilteredDirectoryFound;
 
         public Predicate<string> Filter { get; set; }
 
@@ -38,80 +52,170 @@ namespace FileSystemApp
 
         public IEnumerable<string> GetAllFoldersAndFiles(string startAddress)
         {
-            if (string.IsNullOrEmpty(startAddress) || !Directory.Exists(startAddress))
+            if (!string.IsNullOrEmpty(startAddress) && Directory.Exists(startAddress))
             {
-                var flag = false;
+                var entities = FindEntities(startAddress);
+
+                foreach (var item in entities)
+                {
+                    if (Directory.Exists(item))
+                    {
+                        ++NumberOfDirectories;
+
+                        DirectoryFound?.Invoke(this, new OutputMessageEventArgs
+                        {
+                            Message = "Directory was found: " + Path.GetFileName(item),
+                            NumberOfDirectories = NumberOfDirectories
+                        });
+
+                        if (Filter != null)
+                        {
+                            if (Filter(item))
+                            {
+                                ++NumberOfFilteredDirectories;
+
+                                FilteredDirectoryFound?.Invoke(this, new OutputMessageEventArgs
+                                {
+                                    Message = "Filtered directory was found: " + Path.GetFileName(item),
+                                    NumberOfDirectories = NumberOfFilteredDirectories
+                                });
+                            }
+                            else
+                            {
+                                continue;
+                            }
+                        }
+                        yield return item;
+                    }
+
+                    if (File.Exists(item))
+                    {
+                        ++NumberOfFiles;
+
+                        FileFound?.Invoke(this, new OutputMessageEventArgs
+                        {
+                            Message = "File was found: " + Path.GetFileName(item),
+                            NumberOfFiles = NumberOfFiles
+                        });
+
+                        if (Filter != null)
+                        {
+                            if (Filter(item))
+                            {
+                                ++NumberOfFilteredFiles;
+
+                                FilteredFileFound?.Invoke(this, new OutputMessageEventArgs
+                                {
+                                    Message = "Filtered file was found: " + Path.GetFileName(item),
+                                    NumberOfFiles = NumberOfFilteredFiles
+                                });
+                            }
+                            else
+                            {
+                                continue;
+                            }
+                        }
+                        yield return item;
+                    }
+                }
             }
-
-            StartMessage?.Invoke("-------------Searching was started-------------");
-
-            // without ".ToList()" we can not get the correct order of notification
-            var result = FindEntities(startAddress).ToList();
-
-            EndMessage?.Invoke("-------------Searching was finished-------------");
-
-            return result;
         }
 
         private IEnumerable<string> FindEntities(string startAddress)
         {
-            var directories = GetDirectories(startAddress).ToList();
-            
-            var files = GetFiles(startAddress).ToList();            
-            
-            var entityes = directories.Concat(files).AsEnumerable();
+            var directories = Directory.GetDirectories(startAddress);
 
-            foreach (var directory in directories)
+            var files = Directory.GetFiles(startAddress);
+
+            var entities = directories.Concat(files).AsEnumerable();
+
+            {  /*      foreach (var directory in directories)
             {
-                entityes = entityes.Concat(FindEntities(directory));
+                yield return directory;
             }
 
-            return entityes;
+            foreach (var file in files)
+            {
+                yield return file;
+            } */
+            }
+            foreach (var directory in directories)
+            {
+                entities = entities.Concat(FindEntities(directory));
+            }
+
+            return entities;
         }
 
         private IEnumerable<string> GetDirectories(string startAddress)
         {
             var directories = Directory.GetDirectories(startAddress);
+            return directories;
+            {   //foreach (var item in directories)
+                //{
+                //    ++NumberOfDirectories;
 
-            foreach (var item in directories)
-            {
-                DirectoryFound?.Invoke("Directory was found: " + Path.GetFileName(item));
+                //    DirectoryFound?.Invoke(this, new OutputMessageEventArgs
+                //    {
+                //        Message = "Directory was found: " + Path.GetFileName(item),
+                //        NumberOfDirectories = NumberOfDirectories
+                //    });
 
-                if (Filter != null)
-                {
-                    if (Filter(item))
-                    {
-                        FilteredDirectoryFound?.Invoke("Filtered directory was found: " + Path.GetFileName(item));
-                    }
-                    else
-                    {
-                        continue;
-                    }
-                }
-                yield return item;
+                //    if (Filter != null)
+                //    {
+                //        if (Filter(item))
+                //        {
+                //            ++NumberOfFilteredDirectories;
+
+                //            FilteredDirectoryFound?.Invoke(this, new OutputMessageEventArgs
+                //            {
+                //                Message = "Filtered directory was found: " + Path.GetFileName(item),
+                //                NumberOfDirectories = NumberOfFilteredDirectories
+                //            });
+                //        }
+                //        else
+                //        {
+                //            continue;
+                //        }
+                //    }
+                //    yield return item;
+                //}
             }
         }
 
         private IEnumerable<string> GetFiles(string startAddress)
         {
             var files = Directory.GetFiles(startAddress);
+            return files;
+            {   //foreach (var item in files)
+                //{
+                //    ++NumberOfFiles;
 
-            foreach (var item in files)
-            {
-                FileFound?.Invoke("File was found: " + Path.GetFileName(item));
+                //    FileFound?.Invoke(this, new OutputMessageEventArgs
+                //    {
+                //        Message = "File was found: " + Path.GetFileName(item),
+                //        NumberOfFiles = NumberOfFiles
+                //    });
 
-                if (Filter != null)
-                {
-                    if (Filter(item))
-                    {
-                        FilteredFileFound?.Invoke("Filtered file was found: " + Path.GetFileName(item));
-                    }
-                    else
-                    {
-                        continue;
-                    }
-                }
-                yield return item;
+                //    if (Filter != null)
+                //    {
+                //        if (Filter(item))
+                //        {
+                //            ++NumberOfFilteredFiles;
+
+                //            FilteredFileFound?.Invoke(this, new OutputMessageEventArgs
+                //            {
+                //                Message = "Filtered file was found: " + Path.GetFileName(item),
+                //                NumberOfFiles = NumberOfFilteredFiles
+                //            });
+                //        }
+                //        else
+                //        {
+                //            continue;
+                //        }
+                //    }
+                //    yield return item;
+                //}
             }
         }
     }

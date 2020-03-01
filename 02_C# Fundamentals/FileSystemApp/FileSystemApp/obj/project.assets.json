@@ -186,11 +186,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "e:\\EPAM\\dotnet-A1-Mentoring-Program\\02_C# Fundamentals\\FileSystemApp\\FileSystemApp\\FileSystemApp.csproj",
-      "projectName": "FileSystemApp",
-      "projectPath": "e:\\EPAM\\dotnet-A1-Mentoring-Program\\02_C# Fundamentals\\FileSystemApp\\FileSystemApp\\FileSystemApp.csproj",
+      "projectUniqueName": "E:\\EPAM\\dotnet-A1-Mentoring-Program\\02_C# Fundamentals\\FileSystemApp\\FileSystemApp\\FileSystemAppLibrary.csproj",
+      "projectName": "FileSystemAppLibrary",
+      "projectPath": "E:\\EPAM\\dotnet-A1-Mentoring-Program\\02_C# Fundamentals\\FileSystemApp\\FileSystemApp\\FileSystemAppLibrary.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "e:\\EPAM\\dotnet-A1-Mentoring-Program\\02_C# Fundamentals\\FileSystemApp\\FileSystemApp\\obj\\",
+      "outputPath": "E:\\EPAM\\dotnet-A1-Mentoring-Program\\02_C# Fundamentals\\FileSystemApp\\FileSystemApp\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "E:\\Microsoft\\Xamarin\\NuGet\\",

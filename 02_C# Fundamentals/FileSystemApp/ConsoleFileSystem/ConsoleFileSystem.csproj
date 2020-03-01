@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FileSystemApp\FileSystemApp.csproj" />
+    <ProjectReference Include="..\FileSystemApp\FileSystemAppLibrary.csproj" />
   </ItemGroup>
 
 </Project>

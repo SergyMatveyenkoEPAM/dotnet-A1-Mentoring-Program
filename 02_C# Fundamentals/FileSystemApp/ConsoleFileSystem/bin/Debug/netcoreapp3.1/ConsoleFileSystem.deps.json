@@ -8,15 +8,15 @@
     ".NETCoreApp,Version=v3.1": {
       "ConsoleFileSystem/1.0.0": {
         "dependencies": {
-          "FileSystemApp": "1.0.0"
+          "FileSystemAppLibrary": "1.0.0"
         },
         "runtime": {
           "ConsoleFileSystem.dll": {}
         }
       },
-      "FileSystemApp/1.0.0": {
+      "FileSystemAppLibrary/1.0.0": {
         "runtime": {
-          "FileSystemApp.dll": {}
+          "FileSystemAppLibrary.dll": {}
         }
       }
     }
@@ -27,7 +27,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "FileSystemApp/1.0.0": {
+    "FileSystemAppLibrary/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
