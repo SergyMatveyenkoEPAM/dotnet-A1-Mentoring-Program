@@ -1,8 +1,0 @@
-d:\A1 Mentoring Program\01_Introduction\Hello\HelloLibrary\bin\Debug\netstandard2.0\HelloLibrary.deps.json
-d:\A1 Mentoring Program\01_Introduction\Hello\HelloLibrary\bin\Debug\netstandard2.0\HelloLibrary.dll
-d:\A1 Mentoring Program\01_Introduction\Hello\HelloLibrary\bin\Debug\netstandard2.0\HelloLibrary.pdb
-d:\A1 Mentoring Program\01_Introduction\Hello\HelloLibrary\obj\Debug\netstandard2.0\HelloLibrary.csprojAssemblyReference.cache
-d:\A1 Mentoring Program\01_Introduction\Hello\HelloLibrary\obj\Debug\netstandard2.0\HelloLibrary.AssemblyInfoInputs.cache
-d:\A1 Mentoring Program\01_Introduction\Hello\HelloLibrary\obj\Debug\netstandard2.0\HelloLibrary.AssemblyInfo.cs
-d:\A1 Mentoring Program\01_Introduction\Hello\HelloLibrary\obj\Debug\netstandard2.0\HelloLibrary.dll
-d:\A1 Mentoring Program\01_Introduction\Hello\HelloLibrary\obj\Debug\netstandard2.0\HelloLibrary.pdb
