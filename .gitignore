@@ -103,6 +103,6 @@ src/Rd.Web/Scripts/Tests/Coverage/
 /src/Rd.Web/sitemap_ru.xml
 /src/Rd.Web/sitemap_ua.xml
 
-# Temp word docs #
-##################
+# Temporary Word docs #
+#######################
 ~$*.docx

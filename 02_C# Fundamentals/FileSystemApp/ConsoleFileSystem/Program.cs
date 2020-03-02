@@ -15,7 +15,7 @@ namespace ConsoleFileSystem
             int maxNumberOfFiles = 41;
             int maxNumberOfFilteredFiles = 41;
 
-            string startDirectory = @"e:\EPAM\dotnet-A1-Mentoring-Program\02_C# Fundamentals\FileSystemApp\ConsoleFileSystem\";
+            string startDirectory = @"d:\A1 Mentoring Program\02_C# Fundamentals\FileSystemApp\ConsoleFileSystem\";
 
             FileSystemVisitor fileSystemVisitor = new FileSystemVisitor(address => !address.Contains("Debug"));
 
