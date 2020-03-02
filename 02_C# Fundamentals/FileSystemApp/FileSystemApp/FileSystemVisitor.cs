@@ -70,20 +70,18 @@ namespace FileSystemAppLibrary
 
                         if (Filter != null)
                         {
-                            if (Filter(item))
-                            {
-                                ++NumberOfFilteredDirectories;
-
-                                FilteredDirectoryFound?.Invoke(this, new OutputMessageEventArgs
-                                {
-                                    Message = "Filtered directory was found: " + Path.GetFileName(item),
-                                    NumberOfDirectories = NumberOfFilteredDirectories
-                                });
-                            }
-                            else
+                            if (!Filter(item))
                             {
                                 continue;
                             }
+
+                            ++NumberOfFilteredDirectories;
+
+                            FilteredDirectoryFound?.Invoke(this, new OutputMessageEventArgs
+                            {
+                                Message = "Filtered directory was found: " + Path.GetFileName(item),
+                                NumberOfDirectories = NumberOfFilteredDirectories
+                            });
                         }
                         yield return item;
                     }
@@ -100,20 +98,18 @@ namespace FileSystemAppLibrary
 
                         if (Filter != null)
                         {
-                            if (Filter(item))
-                            {
-                                ++NumberOfFilteredFiles;
-
-                                FilteredFileFound?.Invoke(this, new OutputMessageEventArgs
-                                {
-                                    Message = "Filtered file was found: " + Path.GetFileName(item),
-                                    NumberOfFiles = NumberOfFilteredFiles
-                                });
-                            }
-                            else
+                            if (!Filter(item))
                             {
                                 continue;
                             }
+
+                            ++NumberOfFilteredFiles;
+
+                            FilteredFileFound?.Invoke(this, new OutputMessageEventArgs
+                            {
+                                Message = "Filtered file was found: " + Path.GetFileName(item),
+                                NumberOfFiles = NumberOfFilteredFiles
+                            });
                         }
                         yield return item;
                     }
@@ -123,100 +119,10 @@ namespace FileSystemAppLibrary
 
         private IEnumerable<string> FindEntities(string startAddress)
         {
-            var directories = Directory.GetDirectories(startAddress);
-
-            var files = Directory.GetFiles(startAddress);
-
-            var entities = directories.Concat(files).AsEnumerable();
-
-            {  /*      foreach (var directory in directories)
-            {
-                yield return directory;
-            }
-
-            foreach (var file in files)
-            {
-                yield return file;
-            } */
-            }
-            foreach (var directory in directories)
-            {
-                entities = entities.Concat(FindEntities(directory));
-            }
+            var entities = Directory.GetFileSystemEntries(startAddress, "*", SearchOption.AllDirectories).ToList();
+            entities.Sort();
 
             return entities;
-        }
-
-        private IEnumerable<string> GetDirectories(string startAddress)
-        {
-            var directories = Directory.GetDirectories(startAddress);
-            return directories;
-            {   //foreach (var item in directories)
-                //{
-                //    ++NumberOfDirectories;
-
-                //    DirectoryFound?.Invoke(this, new OutputMessageEventArgs
-                //    {
-                //        Message = "Directory was found: " + Path.GetFileName(item),
-                //        NumberOfDirectories = NumberOfDirectories
-                //    });
-
-                //    if (Filter != null)
-                //    {
-                //        if (Filter(item))
-                //        {
-                //            ++NumberOfFilteredDirectories;
-
-                //            FilteredDirectoryFound?.Invoke(this, new OutputMessageEventArgs
-                //            {
-                //                Message = "Filtered directory was found: " + Path.GetFileName(item),
-                //                NumberOfDirectories = NumberOfFilteredDirectories
-                //            });
-                //        }
-                //        else
-                //        {
-                //            continue;
-                //        }
-                //    }
-                //    yield return item;
-                //}
-            }
-        }
-
-        private IEnumerable<string> GetFiles(string startAddress)
-        {
-            var files = Directory.GetFiles(startAddress);
-            return files;
-            {   //foreach (var item in files)
-                //{
-                //    ++NumberOfFiles;
-
-                //    FileFound?.Invoke(this, new OutputMessageEventArgs
-                //    {
-                //        Message = "File was found: " + Path.GetFileName(item),
-                //        NumberOfFiles = NumberOfFiles
-                //    });
-
-                //    if (Filter != null)
-                //    {
-                //        if (Filter(item))
-                //        {
-                //            ++NumberOfFilteredFiles;
-
-                //            FilteredFileFound?.Invoke(this, new OutputMessageEventArgs
-                //            {
-                //                Message = "Filtered file was found: " + Path.GetFileName(item),
-                //                NumberOfFiles = NumberOfFilteredFiles
-                //            });
-                //        }
-                //        else
-                //        {
-                //            continue;
-                //        }
-                //    }
-                //    yield return item;
-                //}
-            }
         }
     }
 }
