@@ -17,7 +17,7 @@ namespace ConsoleFileSystem
 
             string startDirectory = @"d:\A1 Mentoring Program\02_C# Fundamentals\FileSystemApp\ConsoleFileSystem\";
 
-            FileSystemVisitor fileSystemVisitor = new FileSystemVisitor(address => !address.Contains("Debug"));
+            FileSystemVisitor fileSystemVisitor = new FileSystemVisitor(address => !address.Contains("Debug"), new SystemEntitiesInfo());
 
             // subscribe for events
             fileSystemVisitor.StartMessage += (sender, e) => Console.WriteLine(e.Message);
@@ -49,22 +49,17 @@ namespace ConsoleFileSystem
                 Console.WriteLine("Path to the start directory is incorrect.");
             }
 
-            fileSystemVisitor.StartMessageFire();
-
             List<string> results = new List<string>();
 
             foreach (var item in fileSystemVisitor.GetAllFoldersAndFiles(startDirectory)/*.ToList()*/)
             {
-                if (!isEnough)
-                {
-                    results.Add(item);
-                }
-                else
+                if (isEnough)
                 {
                     break;
                 }
+
+                results.Add(item);
             }
-            fileSystemVisitor.EndMessageFire();
 
             Console.WriteLine("\nSearching results:");
 
