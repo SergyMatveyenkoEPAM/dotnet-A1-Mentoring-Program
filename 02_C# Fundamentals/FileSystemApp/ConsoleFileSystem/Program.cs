@@ -17,7 +17,7 @@ namespace ConsoleFileSystem
 
             string startDirectory = @"d:\A1 Mentoring Program\02_C# Fundamentals\FileSystemApp\ConsoleFileSystem\";
 
-            FileSystemVisitor fileSystemVisitor = new FileSystemVisitor(address => !address.Contains("Debug"), new SystemEntitiesInfo());
+            FileSystemVisitor fileSystemVisitor = new FileSystemVisitor(address => !address.Contains("Debug"), new SystemEntitiesInfo(), new EntityFinder());
 
             // subscribe for events
             fileSystemVisitor.StartMessage += (sender, e) => Console.WriteLine(e.Message);
@@ -51,7 +51,7 @@ namespace ConsoleFileSystem
 
             List<string> results = new List<string>();
 
-            foreach (var item in fileSystemVisitor.GetAllFoldersAndFiles(startDirectory)/*.ToList()*/)
+            foreach (var item in fileSystemVisitor.GetAllFoldersAndFiles(startDirectory))
             {
                 if (isEnough)
                 {

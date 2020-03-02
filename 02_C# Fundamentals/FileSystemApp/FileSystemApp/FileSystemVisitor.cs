@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 
 namespace FileSystemAppLibrary
 {
     public class FileSystemVisitor
-    {
+    { 
+        private SystemEntitiesInfo _systemEntitiesInfo;
+        private EntityFinder _entityFinder;
+
         public int NumberOfDirectories { get; set; }
         public int NumberOfFilteredDirectories { get; set; }
         public int NumberOfFiles { get; set; }
         public int NumberOfFilteredFiles { get; set; }
-        private SystemEntitiesInfo _systemEntitiesInfo;
 
         public event EventHandler<OutputMessageEventArgs> StartMessage;
         public event EventHandler<OutputMessageEventArgs> EndMessage;
@@ -22,10 +23,11 @@ namespace FileSystemAppLibrary
 
         public Predicate<string> Filter { get; set; }
 
-        public FileSystemVisitor(Predicate<string> filter, SystemEntitiesInfo systemEntitiesInfo)
+        public FileSystemVisitor(Predicate<string> filter, SystemEntitiesInfo systemEntitiesInfo, EntityFinder entityFinder)
         {
             Filter = filter;
             _systemEntitiesInfo = systemEntitiesInfo;
+            _entityFinder = entityFinder;
         }
 
         public IEnumerable<string> GetAllFoldersAndFiles(string startAddress)
@@ -40,7 +42,7 @@ namespace FileSystemAppLibrary
                 Message = "-------------Searching was started-------------"
             });
 
-            var entities = FindEntities(startAddress);
+            var entities = _entityFinder.FindEntities(startAddress);
 
             foreach (var item in entities)
             {
@@ -59,14 +61,6 @@ namespace FileSystemAppLibrary
             {
                 Message = "-------------Searching was finished-------------"
             });
-        }
-
-        private IEnumerable<string> FindEntities(string startAddress)
-        {
-            var entities = Directory.GetFileSystemEntries(startAddress, "*", SearchOption.AllDirectories).ToList();
-            entities.Sort();
-
-            return entities;
         }
 
         private bool HandleDirectory(string item)

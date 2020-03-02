@@ -1,7 +1,9 @@
 ﻿using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using FileSystemAppLibrary.Tests.FakeEnvironmentModels;
 
 namespace FileSystemAppLibrary.Tests.UnitTests
 {
@@ -9,18 +11,16 @@ namespace FileSystemAppLibrary.Tests.UnitTests
     class FileSystemVisitorTests
     {
         [Test]
-        public void Find_Request_True()
+        public void GetAllFoldersAndFiles_Entities_NumberOfDirectoryFound()
         {
             // Arrange
-            int a = 1;
-            int b = 1;
-            int c;
+            FileSystemVisitor fileSystemVisitor = new FileSystemVisitor(address => !address.Contains("Debug"), new FakeSystemEntitiesInfo(), new FakeEntityFinder());
 
             // Act
-            c = a + b;
+           int numberOfEntitiesFound = fileSystemVisitor.GetAllFoldersAndFiles("fakeAddress").ToList().Count;
 
             //Assert
-            Assert.IsTrue(c == 2);
+            Assert.IsTrue((new FakeEntityFinder()).CatalogTree.Count == numberOfEntitiesFound);
         }
 
     }
