@@ -47,7 +47,7 @@ namespace FileSystemAppLibrary.Tests.UnitTests
             int numberOfEntitiesFound = fileSystemVisitor.GetAllFoldersAndFiles("fakeAddress").ToList().Count;
 
             //Assert
-            Assert.IsTrue(_entityFinder.FindEntities("").Count() == numberOfEntitiesFound);
+            Assert.AreEqual(_entityFinder.FindEntities("").Count(), numberOfEntitiesFound);
         }
 
         [Test]
@@ -107,7 +107,7 @@ namespace FileSystemAppLibrary.Tests.UnitTests
             fileSystemVisitor.GetAllFoldersAndFiles("fakeAddress").ToList();
 
             //Assert
-            Assert.IsTrue(numberOfDirectories == _entityFinder.FindEntities("").Where(s => !Path.GetFileName(s).Contains(".")).Count());
+            Assert.AreEqual(numberOfDirectories, _entityFinder.FindEntities("").Where(s => !Path.GetFileName(s).Contains(".")).Count());
         }
 
         [Test]
@@ -122,7 +122,7 @@ namespace FileSystemAppLibrary.Tests.UnitTests
             fileSystemVisitor.GetAllFoldersAndFiles("fakeAddress").ToList();
 
             //Assert
-            Assert.IsTrue(numberOfDirectories == _entityFinder.FindEntities("").Where(s => !Path.GetFileName(s).Contains(".") && !s.Contains("TierTwo")).Count());
+            Assert.AreEqual(numberOfDirectories, _entityFinder.FindEntities("").Where(s => !Path.GetFileName(s).Contains(".") && !s.Contains("TierTwo")).Count());
         }
 
 

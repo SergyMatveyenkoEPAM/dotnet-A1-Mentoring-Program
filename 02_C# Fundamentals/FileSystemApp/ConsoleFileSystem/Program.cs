@@ -47,6 +47,7 @@ namespace ConsoleFileSystem
             if (string.IsNullOrEmpty(startDirectory) || !Directory.Exists(startDirectory))
             {
                 Console.WriteLine("Path to the start directory is incorrect.");
+                return;
             }
 
             List<string> results = new List<string>();
