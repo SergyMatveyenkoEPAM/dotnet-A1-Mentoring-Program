@@ -1,12 +1,29 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
-using System.Security.Permissions;
 using System.Text.RegularExpressions;
 
 namespace SystemWatcherApp
 {
     class Program
     {
+        readonly static List<string> startDirectories;
+        readonly static List<FileSystemWatcher> watchers;
+        readonly static string defaultDirectory = @"e:\_02_BCL\Default\";
+        readonly static string filesWithA = @"e:\_02_BCL\FilesWithA\";
+        readonly static Regex filesWithARegex = new Regex(@"a+", RegexOptions.IgnoreCase);
+        readonly static string filesWithNumber = @"e:\_02_BCL\FilesWithNumber\";
+        readonly static Regex filesWithNumberRegex = new Regex(@"[0-9]+");
+
+        static Dictionary<Regex, string> rules;
+
+        static Program()
+        {
+            rules = new Dictionary<Regex, string> { { filesWithARegex, filesWithA }, { filesWithNumberRegex, filesWithNumber } };
+            startDirectories = new List<string> { @"e:\_02_BCL\Start1\", @"e:\_02_BCL\Start2\", @"e:\_02_BCL\Start3\" };
+            watchers = new List<FileSystemWatcher>();
+        }
+
         static void Main(string[] args)
         {
             Run();
@@ -14,36 +31,25 @@ namespace SystemWatcherApp
 
         public static void Run()
         {
-            string rootDirectory = @"d:\_02_BCL\Root\";
-            // Create a new FileSystemWatcher and set its properties.
-            FileSystemWatcher watcher = new FileSystemWatcher();
-            if (string.IsNullOrEmpty(rootDirectory))
+            // establish environment
+            foreach (var startDirectory in startDirectories)
             {
-                string[] args = System.Environment.GetCommandLineArgs();
-
-                // If a directory is not specified, exit program.
-                if (args.Length != 2)
-                {
-                    // Display the proper way to call the program.
-                    Console.WriteLine("Usage: SystemWatcherApp.exe (directory)");
-                    return;
-                }
-
-                watcher.Path = args[1];
+                Directory.CreateDirectory(startDirectory);
             }
-            watcher.Path = rootDirectory;
-            /* Watch for changes in LastAccess and LastWrite times, and
-               the renaming of files or directories. */
-            watcher.NotifyFilter = NotifyFilters.LastAccess | NotifyFilters.LastWrite
-                                                            | NotifyFilters.FileName | NotifyFilters.DirectoryName;
-            // Only watch text files.
-          //  watcher.Filter = "*.*";
+            Directory.CreateDirectory(defaultDirectory);
+            Directory.CreateDirectory(filesWithA);
+            Directory.CreateDirectory(filesWithNumber);
 
-            // Add event handlers.
-            watcher.Created += new FileSystemEventHandler(OnChanged);
+            // Create a new FileSystemWatcher and set its properties.
+            foreach (var startDirectory in startDirectories)
+            {
+                FileSystemWatcher watcher = new FileSystemWatcher();
+                watcher.Path = startDirectory;
+                watcher.Created += new FileSystemEventHandler(OnChanged);
+                watcher.EnableRaisingEvents = true;
 
-            // Begin watching.
-            watcher.EnableRaisingEvents = true;
+                watchers.Add(watcher) ;
+            }
 
             // Wait for the user to quit the program.
             Console.WriteLine("Press \'Ctrl+C\' or \'Ctrl+Break\' to quit the sample.");
@@ -53,14 +59,35 @@ namespace SystemWatcherApp
         // Define the event handlers.
         private static void OnChanged(object source, FileSystemEventArgs e)
         {
+            string newAddress = "";
+            bool isMatch = false;
             // Specify what is done when a file is changed, created, or deleted.
-            Console.WriteLine("File: " + e.FullPath + " " + e.ChangeType);
-           // if (e.Name.Contains("a"))
+            Console.WriteLine("File " + e.FullPath+ " has been created " + File.GetCreationTime(e.FullPath));
+            foreach (var rule in rules)
             {
-                Console.WriteLine(e.FullPath + "\n" + @"d:\_02_BCL\FilesWithA\"+Path.GetFileName(e.FullPath));
+                if (rule.Key.IsMatch(Path.GetFileName(e.FullPath)))
+                {
+                    newAddress = rule.Value + Path.GetFileName(e.FullPath);
+                    isMatch = true;
+                    Console.WriteLine("The rule \""+ rule.Key + "\" was matched");
+                    break;
+                }
             }
+
+            if (!isMatch)
+            {
+                newAddress = defaultDirectory + Path.GetFileName(e.FullPath);
+                Console.WriteLine("No rule matched");
+            }
+
+            File.Move(e.FullPath, newAddress);
+            Console.WriteLine("The file has been moved to " + newAddress);
+            // if (e.Name.Contains("a"))
+            //{
+            //    Console.WriteLine(e.FullPath + "\n" + filesWithA + Path.GetFileName(e.FullPath));
+            //}
         }
 
-      
+
     }
 }
