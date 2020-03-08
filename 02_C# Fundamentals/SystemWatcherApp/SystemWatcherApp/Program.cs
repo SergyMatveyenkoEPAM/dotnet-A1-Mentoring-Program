@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Threading;
+using SystemWatcherApp.Resources;
 
 namespace SystemWatcherApp
 {
@@ -14,6 +17,7 @@ namespace SystemWatcherApp
         readonly static Regex filesWithARegex = new Regex(@"a+", RegexOptions.IgnoreCase);
         readonly static string filesWithNumber = @"e:\_02_BCL\FilesWithNumber\";
         readonly static Regex filesWithNumberRegex = new Regex(@"[0-9]+");
+        static CultureInfo currentCulture;
 
         static Dictionary<Regex, string> rules;
 
@@ -26,6 +30,25 @@ namespace SystemWatcherApp
 
         static void Main(string[] args)
         {
+            string culture;
+            do
+            {
+                Console.WriteLine("Для выбора русской локализации введите \"ру\". To select English localization, enter \"en\"");
+                culture = Console.ReadLine();
+            } while (culture != "ру" && culture != "en");
+
+            switch (culture)
+            {
+                case "ру":
+                    currentCulture = new CultureInfo("ru-RU");
+                    break;
+                default:
+                    currentCulture = new CultureInfo("en-US");
+                    break;
+            }
+
+            Thread.CurrentThread.CurrentUICulture = currentCulture;
+
             Run();
         }
 
@@ -48,11 +71,12 @@ namespace SystemWatcherApp
                 watcher.Created += new FileSystemEventHandler(OnChanged);
                 watcher.EnableRaisingEvents = true;
 
-                watchers.Add(watcher) ;
+                watchers.Add(watcher);
             }
 
+
             // Wait for the user to quit the program.
-            Console.WriteLine("Press \'Ctrl+C\' or \'Ctrl+Break\' to quit the sample.");
+            Console.WriteLine(Resource.Suggesting_The_Way_To_Quit);
             while (true) ;
         }
 
@@ -62,14 +86,14 @@ namespace SystemWatcherApp
             string newAddress = "";
             bool isMatch = false;
             // Specify what is done when a file is changed, created, or deleted.
-            Console.WriteLine("File " + e.FullPath+ " has been created " + File.GetCreationTime(e.FullPath));
+            Console.WriteLine(string.Format(Resource.File_Has_Been_Created, e.FullPath, File.GetCreationTime(e.FullPath).ToString(currentCulture)));
             foreach (var rule in rules)
             {
                 if (rule.Key.IsMatch(Path.GetFileName(e.FullPath)))
                 {
                     newAddress = rule.Value + Path.GetFileName(e.FullPath);
                     isMatch = true;
-                    Console.WriteLine("The rule \""+ rule.Key + "\" was matched");
+                    Console.WriteLine(string.Format(Resource.The_Rule_Was_Matched, rule.Key));
                     break;
                 }
             }
@@ -77,11 +101,11 @@ namespace SystemWatcherApp
             if (!isMatch)
             {
                 newAddress = defaultDirectory + Path.GetFileName(e.FullPath);
-                Console.WriteLine("No rule matched");
+                Console.WriteLine(Resource.No_Rule_Matched);
             }
 
             File.Move(e.FullPath, newAddress);
-            Console.WriteLine("The file has been moved to " + newAddress);
+            Console.WriteLine(string.Format(Resource.The_File_Has_Been_Moved_To, newAddress));
             // if (e.Name.Contains("a"))
             //{
             //    Console.WriteLine(e.FullPath + "\n" + filesWithA + Path.GetFileName(e.FullPath));
