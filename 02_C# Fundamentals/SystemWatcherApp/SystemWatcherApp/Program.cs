@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Globalization;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Threading;
+using SystemWatcherApp.Configs;
 using SystemWatcherApp.Resources;
 
 namespace SystemWatcherApp
@@ -30,7 +32,14 @@ namespace SystemWatcherApp
 
         static void Main(string[] args)
         {
-            string culture;
+            WatcherSectionGroup watcherSectionGroup= ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).SectionGroups["watcherSectionGroup"] as WatcherSectionGroup;
+
+            foreach (ConfigurationSection section in watcherSectionGroup.Sections)
+            {
+                Console.WriteLine(section.SectionInformation.Name);
+            }
+
+                string culture;
             do
             {
                 Console.WriteLine("Для выбора русской локализации введите \"ру\". To select English localization, enter \"en\"");
