@@ -2,8 +2,9 @@
 
 namespace SystemWatcherApp.Configs
 {
-    public class RuleCollection : ConfigurationElementCollection
-    {      
+    [ConfigurationCollection(typeof(RuleElement), AddItemName = "rule")]
+    public class RuleElementCollection : ConfigurationElementCollection
+    {
         protected override ConfigurationElement CreateNewElement()
         {
             return new RuleElement();
@@ -11,7 +12,7 @@ namespace SystemWatcherApp.Configs
 
         protected override object GetElementKey(ConfigurationElement element)
         {
-            return ((RuleElement)element).Name;
+            return ((RuleElement)element).Pattern;
         }
     }
 }
