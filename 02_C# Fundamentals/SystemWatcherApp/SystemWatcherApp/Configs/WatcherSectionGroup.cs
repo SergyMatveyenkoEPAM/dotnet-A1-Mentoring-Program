@@ -15,5 +15,11 @@ namespace SystemWatcherApp.Configs
         {
             get { return (LocaleSection)base.Sections["localeSection"]; }
         }
+
+        [ConfigurationProperty("trackingFoldersSection", IsRequired = true)]
+        public TrackingFoldersSection TrackingFoldersSettings
+        {
+            get { return (TrackingFoldersSection)base.Sections["trackingFoldersSection"]; }
+        }
     }
 }

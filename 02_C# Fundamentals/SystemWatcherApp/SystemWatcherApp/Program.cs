@@ -15,7 +15,7 @@ namespace SystemWatcherApp
     {
         readonly static List<string> startDirectories;
         readonly static List<FileSystemWatcher> watchers;
-        readonly static string defaultDirectory = @"D:\_02_BCL\Default\";
+        readonly static string defaultDirectory;
         static CultureInfo currentCulture;
         static List<RuleElement> rules;
 
@@ -24,74 +24,66 @@ namespace SystemWatcherApp
             rules = new List<RuleElement>();
             startDirectories = new List<string>();
             watchers = new List<FileSystemWatcher>();
+            defaultDirectory = ConfigurationManager.AppSettings["defaultDirectory"];
         }
 
         static void Main(string[] args)
         {
             Console.OutputEncoding = Encoding.UTF8;
 
+            ApplyConfigurationSettings();
+
+            EstablishEnvironment();
+
+            CreateFileSystemWatchers();
+
+            // Wait for the user to quit the program.
+            Console.WriteLine(Resource.Suggesting_The_Way_To_Quit);
+
+            while (true) ;
+        }
+
+        public static void ApplyConfigurationSettings()
+        {
             WatcherSectionGroup watcherSectionGroup = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).SectionGroups["watcherSection"] as WatcherSectionGroup;
 
-            foreach (ConfigurationSection section in watcherSectionGroup.Sections)
+            RuleSection ruleSection = watcherSectionGroup.GeneralSettings;
+            RuleElementCollection ruleElementCollection = ruleSection.Rules;
+            foreach (RuleElement ruleElement in ruleElementCollection)
             {
-                if (section.GetType() == typeof(RuleSection))
-                {
-                    RuleSection ruleSection = (RuleSection)section;
-                    RuleElementCollection ruleElementCollection = ruleSection.Rules;
-                    foreach (RuleElement ruleElement in ruleElementCollection)
-                    {
-                        rules.Add(ruleElement);
-                    }
-                }
+                rules.Add(ruleElement);
+            }
 
-                else if (section.GetType() == typeof(LocaleSection))
-                {
-                    LocaleSection localeSection = (LocaleSection)section;
-                    switch (localeSection.LocaleCode)
-                    {
-                        case "ru":
-                            currentCulture = new CultureInfo("ru-RU");
-                            break;
-                        default:
-                            currentCulture = new CultureInfo("en-US");
-                            break;
-                    }
-                }
+            LocaleSection localeSection = watcherSectionGroup.ContextSettings;
+            currentCulture = new CultureInfo(localeSection.LocaleCode);
 
-                else if (section.GetType() == typeof(TrackingFoldersSection))
-                {
-                    TrackingFoldersSection trackingFoldersSection = (TrackingFoldersSection)section;
-                    TrackingFolderElementCollection trackingFolderElementCollection = trackingFoldersSection.TrackingFolders;
-                    foreach (TrackingFolderElement trackingFolderElement in trackingFolderElementCollection)
-                    {
-                        startDirectories.Add(trackingFolderElement.Address);
-                    }
-                }
+            TrackingFoldersSection trackingFoldersSection = watcherSectionGroup.TrackingFoldersSettings;
+            TrackingFolderElementCollection trackingFolderElementCollection = trackingFoldersSection.TrackingFolders;
+            foreach (TrackingFolderElement trackingFolderElement in trackingFolderElementCollection)
+            {
+                startDirectories.Add(trackingFolderElement.Address);
             }
 
             Thread.CurrentThread.CurrentUICulture = currentCulture;
-
-            Run();
         }
 
-        public static void Run()
+        public static void EstablishEnvironment()
         {
-            // establish environment
+            foreach (var startDirectory in startDirectories)
             {
-                foreach (var startDirectory in startDirectories)
-                {
-                    Directory.CreateDirectory(startDirectory);
-                }
-
-                foreach (var rule in rules)
-                {
-                    Directory.CreateDirectory(rule.Address);
-                }
-
-                Directory.CreateDirectory(defaultDirectory);
+                Directory.CreateDirectory(startDirectory);
             }
 
-            // Create a new FileSystemWatcher and set its properties.
+            foreach (var rule in rules)
+            {
+                Directory.CreateDirectory(rule.Address);
+            }
+
+            Directory.CreateDirectory(defaultDirectory);
+        }
+
+        public static void CreateFileSystemWatchers()
+        {
             foreach (var startDirectory in startDirectories)
             {
                 FileSystemWatcher watcher = new FileSystemWatcher();
@@ -101,11 +93,6 @@ namespace SystemWatcherApp
 
                 watchers.Add(watcher);
             }
-
-            // Wait for the user to quit the program.
-            Console.WriteLine(Resource.Suggesting_The_Way_To_Quit);
-
-            while (true) ;
         }
 
         // Define the event handlers.
@@ -122,9 +109,9 @@ namespace SystemWatcherApp
                 {
                     string numericPrefix = rule.IsRequiredNumeration ? (Directory.GetFiles(rule.Address).Length + 1) + "_" : "";
 
-                    string datePostfix = rule.IsRequiredMoveDate ? DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") : "";
+                    string datePrefix = rule.IsRequiredMoveDate ? DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") : "";
 
-                    newAddress = rule.Address + numericPrefix + Path.GetFileName(e.FullPath) + datePostfix;
+                    newAddress = rule.Address + numericPrefix + datePrefix + Path.GetFileName(e.FullPath);
 
                     isMatch = true;
 
