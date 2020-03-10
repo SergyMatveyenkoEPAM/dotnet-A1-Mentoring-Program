@@ -16,7 +16,6 @@ namespace SystemWatcherApp
         readonly static List<string> startDirectories;
         readonly static List<FileSystemWatcher> watchers;
         readonly static string defaultDirectory;
-        static CultureInfo currentCulture;
         static List<RuleElement> rules;
 
         static Program()
@@ -48,23 +47,18 @@ namespace SystemWatcherApp
             WatcherSectionGroup watcherSectionGroup = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).SectionGroups["watcherSection"] as WatcherSectionGroup;
 
             RuleSection ruleSection = watcherSectionGroup.GeneralSettings;
-            RuleElementCollection ruleElementCollection = ruleSection.Rules;
-            foreach (RuleElement ruleElement in ruleElementCollection)
+            foreach (RuleElement ruleElement in ruleSection.Rules)
             {
                 rules.Add(ruleElement);
             }
 
-            LocaleSection localeSection = watcherSectionGroup.ContextSettings;
-            currentCulture = new CultureInfo(localeSection.LocaleCode);
-
             TrackingFoldersSection trackingFoldersSection = watcherSectionGroup.TrackingFoldersSettings;
-            TrackingFolderElementCollection trackingFolderElementCollection = trackingFoldersSection.TrackingFolders;
-            foreach (TrackingFolderElement trackingFolderElement in trackingFolderElementCollection)
+            foreach (TrackingFolderElement trackingFolderElement in trackingFoldersSection.TrackingFolders)
             {
                 startDirectories.Add(trackingFolderElement.Address);
             }
 
-            Thread.CurrentThread.CurrentUICulture = currentCulture;
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(watcherSectionGroup.ContextSettings.LocaleCode);
         }
 
         public static void EstablishEnvironment()
@@ -101,7 +95,7 @@ namespace SystemWatcherApp
             string newAddress = "";
             bool isMatch = false;
 
-            Console.WriteLine(string.Format(Resource.File_Has_Been_Created, e.FullPath, File.GetCreationTime(e.FullPath).ToString(currentCulture)));
+            Console.WriteLine(string.Format(Resource.File_Has_Been_Created, e.FullPath, File.GetCreationTime(e.FullPath).ToString(Thread.CurrentThread.CurrentUICulture)));
 
             foreach (var rule in rules)
             {
