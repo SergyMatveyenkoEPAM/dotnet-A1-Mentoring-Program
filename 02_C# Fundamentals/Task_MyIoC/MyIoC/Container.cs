@@ -18,7 +18,38 @@ namespace MyIoC
         }
 
         public void AddAssembly(Assembly assembly)
-        { }
+        {
+            var interfaces = new List<Type>();
+            foreach (var type in assembly.GetTypes().Where(x => x.IsInterface))
+            {
+                interfaces.Add(type);
+            }
+
+            foreach (var type in assembly.GetTypes().Where(x => x.IsClass))
+            {
+                if (interfaces.Any(i => i.IsAssignableFrom(type)))
+                {
+                    foreach (var @interface in interfaces)
+                    {
+                        if (@interface.IsAssignableFrom(type))
+                        {
+                            AddType(type, @interface);
+                        }
+                    }
+                }
+                // Console.WriteLine(type.FullName + " has attributes: " + type.Attributes);
+                else
+                {
+                    if (type == typeof(CustomerBLL) || type == typeof(Logger))
+                    {
+                        _typesDictionary.Add(type, type);
+                    }
+                }
+            }
+
+
+
+        }
 
         public void AddType(Type type)
         {
@@ -32,12 +63,21 @@ namespace MyIoC
 
         public object CreateInstance(Type type)
         {
-            return null;
+            if (!_typesDictionary.ContainsKey(type))
+            {
+                return null;
+            }
+            var concreteType = _typesDictionary[type];
+            var defaultCtor = concreteType.GetConstructors()[0];
+            var defaultParams = defaultCtor.GetParameters();
+            var parameters = defaultParams.Select(param => CreateInstance(param.ParameterType)).ToArray();
+
+            return defaultCtor.Invoke(parameters);
         }
 
         public T CreateInstance<T>()
         {
-            return default(T);
+            return (T)CreateInstance(typeof(T));
         }
 
 
@@ -45,14 +85,14 @@ namespace MyIoC
         {
             var container = new Container();
             container.AddAssembly(Assembly.GetExecutingAssembly());
-            
+
             container.AddType(typeof(CustomerBLL));
             container.AddType(typeof(Logger));
             container.AddType(typeof(CustomerDAL), typeof(ICustomerDAL));
 
             var customerBLL = (CustomerBLL)container.CreateInstance(typeof(CustomerBLL));
             var customerBLL2 = container.CreateInstance<CustomerBLL>();
-            
+
         }
     }
 }

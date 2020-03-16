@@ -9,8 +9,10 @@ namespace MyIoC
 	[ImportConstructor]
 	public class CustomerBLL
 	{
-		public CustomerBLL(ICustomerDAL dal, Logger logger)
-		{ }
+        public CustomerBLL(ICustomerDAL dal, Logger logger)
+        {
+            Console.WriteLine("CustomerBLL instance has been created");
+        }
 	}
 
 	public class CustomerBLL2
