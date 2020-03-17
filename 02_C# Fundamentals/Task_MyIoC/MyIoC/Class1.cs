@@ -21,5 +21,10 @@ namespace MyIoC
 		public ICustomerDAL CustomerDAL { get; set; }
 		[Import]
 		public Logger logger { get; set; }
+
+		public CustomerBLL2()
+		{
+			Console.WriteLine("CustomerBLL2 instance has been created");
+		}
 	}
 }
