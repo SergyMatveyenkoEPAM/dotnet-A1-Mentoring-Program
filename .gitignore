@@ -106,3 +106,7 @@ src/Rd.Web/Scripts/Tests/Coverage/
 # Temporary Word docs #
 #######################
 ~$*.docx
+
+# Temporary SQL files #
+#######################
+~$*.sql.design
