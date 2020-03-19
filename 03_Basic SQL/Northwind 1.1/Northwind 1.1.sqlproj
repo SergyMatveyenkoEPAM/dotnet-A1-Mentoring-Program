@@ -104,8 +104,6 @@
   <Import Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" Condition="'$(SQLDBExtensionsRefPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" Condition="'$(SQLDBExtensionsRefPath)' == ''" />
   <ItemGroup>
-    <Folder Include="Scripts" />
-    <Folder Include="Scripts\Post-Deployment" />
     <Folder Include="Properties\" />
     <Folder Include="Schema Objects\" />
     <Folder Include="Schema Objects\Schemas\" />
@@ -167,38 +165,6 @@
   </ItemGroup>
   <ItemGroup>
     <BuildContributorArgument Include="OutDir=$(OutDir)" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Scripts\Post-Deployment\Region.sql">
-      <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Scripts\Post-Deployment\Employees.sql">
-      <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Scripts\Post-Deployment\Categories.sql">
-      <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Scripts\Post-Deployment\Customers.sql">
-      <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Scripts\Post-Deployment\Shippers.sql">
-      <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Scripts\Post-Deployment\Suppliers.sql">
-      <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Scripts\Post-Deployment\Orders.sql">
-      <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Scripts\Post-Deployment\Products.sql">
-      <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Scripts\Post-Deployment\OrderDetails.sql">
-      <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Scripts\Post-Deployment\EmployeeTerritories.sql">
-      <SubType>NotInBuild</SubType>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Build Include="Schema Objects\Schemas\Northwind\Tables\CustomerDemographics.table.sql">
@@ -318,9 +284,6 @@
     <Build Include="Schema Objects\Schemas\Northwind\Tables\Territories.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <None Include="Scripts\Post-Deployment\Territories.sql">
-      <SubType>Code</SubType>
-    </None>
     <Build Include="Schema Objects\Schemas\Northwind\Tables\EmployeeTerritories.table.sql">
       <SubType>Code</SubType>
     </Build>
@@ -493,8 +456,5 @@
   <ItemGroup>
     <None Include="Debug.publish.xml" />
     <None Include="Release.publish.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <PostDeploy Include="Scripts\Post-Deployment\Script.PostDeployment.sql" />
   </ItemGroup>
 </Project>

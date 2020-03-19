@@ -169,38 +169,6 @@
     <BuildContributorArgument Include="OutDir=$(OutDir)" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Scripts\Post-Deployment\Regions.sql">
-      <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Scripts\Post-Deployment\Employees.sql">
-      <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Scripts\Post-Deployment\Categories.sql">
-      <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Scripts\Post-Deployment\Customers.sql">
-      <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Scripts\Post-Deployment\Shippers.sql">
-      <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Scripts\Post-Deployment\Suppliers.sql">
-      <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Scripts\Post-Deployment\Orders.sql">
-      <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Scripts\Post-Deployment\Products.sql">
-      <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Scripts\Post-Deployment\OrderDetails.sql">
-      <SubType>NotInBuild</SubType>
-    </None>
-    <None Include="Scripts\Post-Deployment\EmployeeTerritories.sql">
-      <SubType>NotInBuild</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <Build Include="Schema Objects\Schemas\Northwind\Tables\CustomerDemographics.table.sql">
       <SubType>Code</SubType>
     </Build>
@@ -318,9 +286,6 @@
     <Build Include="Schema Objects\Schemas\Northwind\Tables\Territories.table.sql">
       <SubType>Code</SubType>
     </Build>
-    <None Include="Scripts\Post-Deployment\Territories.sql">
-      <SubType>Code</SubType>
-    </None>
     <Build Include="Schema Objects\Schemas\Northwind\Tables\EmployeeTerritories.table.sql">
       <SubType>Code</SubType>
     </Build>
