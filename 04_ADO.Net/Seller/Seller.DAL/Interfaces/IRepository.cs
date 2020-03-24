@@ -1,10 +1,14 @@
-﻿namespace Seller.DAL.Interfaces
+﻿using System.Collections.Generic;
+
+namespace Seller.DAL.Interfaces
 {
     interface IRepository<T>
     {
         public string ConnectionString { get; set; }
 
-        T Get(int id);
+        IEnumerable<T> GetAll();
+
+        T GetById(int id);
 
         void Add(T item);
 
