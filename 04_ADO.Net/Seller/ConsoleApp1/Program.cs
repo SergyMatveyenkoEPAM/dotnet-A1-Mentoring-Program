@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using System.Linq;
 using Seller.DAL.Repositories;
 
 namespace ConsoleApp1
@@ -8,8 +9,28 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
+            string connectionString = ConfigurationManager.ConnectionStrings["NorthwindConnection"].ConnectionString;
+
+
+            var _categoryRepository = new CategoryRepository(connectionString);
+
+            var category = _categoryRepository.GetById(1);
+
+
+
+
             Console.WriteLine("Hello World!");
+            var picture = category.Picture.Skip(78);
+            var rubbish = category.Picture.Take(78);
+
             var orderRepository = new OrderRepository(ConfigurationManager.ConnectionStrings["NorthwindConnection"].ConnectionString);
+            foreach (var item in rubbish)
+            {
+                Console.Write(item);
+            }
+
+            Console.WriteLine("\n---------------------------------");
+            
             var res = orderRepository.GetById(11077);
             Console.WriteLine(res.OrderID.ToString());
             Console.WriteLine(res.CustomerID.ToString());
@@ -35,10 +56,10 @@ namespace ConsoleApp1
             }
 
             //  orderRepository.Add(res);
-            res.OrderID = 11081;
+            /*res.OrderID = 11081;
             res.ShipCity = "Gomel";
             
-            orderRepository.Update(res);
+            orderRepository.Update(res);*/
 
 
             //foreach (var order in orderRepository.GetAll())
@@ -50,7 +71,7 @@ namespace ConsoleApp1
             //    }
             //}
 
-          //  orderRepository.Delete(11080);
+            //  orderRepository.Delete(11080);
             Console.ReadKey();
         }
     }

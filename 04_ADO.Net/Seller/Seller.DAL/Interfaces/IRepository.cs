@@ -4,7 +4,7 @@ namespace Seller.DAL.Interfaces
 {
     interface IRepository<T>
     {
-        public string ConnectionString { get; set; }
+        string ConnectionString { get; set; }
 
         IEnumerable<T> GetAll();
 
