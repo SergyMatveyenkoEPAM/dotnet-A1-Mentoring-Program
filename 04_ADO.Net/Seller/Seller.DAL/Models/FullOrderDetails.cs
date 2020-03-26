@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Seller.DAL.Models
 {
-    public enum Status { New, InWork, Completed }
-    public class Order
+    public class FullOrderDetails
     {
         public int OrderID { get; set; }
         public string CustomerID { get; set; }
@@ -21,5 +21,12 @@ namespace Seller.DAL.Models
         public string ShipPostalCode { get; set; }
         public string ShipCountry { get; set; }
         public Status Status { get; set; }
+        public int ProductID { get; set; }
+        public string ProductName { get; set; }
+        public int? CategoryID { get; set; }
+        public string QuantityPerUnit { get; set; }
+        public decimal UnitPrice { get; set; }
+        public int Quantity { get; set; }
+        public double Discount { get; set; }
     }
 }

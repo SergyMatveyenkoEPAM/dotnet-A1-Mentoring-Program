@@ -9,7 +9,7 @@ using Seller.DAL.Exceptions;
 
 namespace Seller.DAL.Repositories
 {
-    public class OrderRepository : IRepository<Order>
+    public class OrderRepository : IOrderRepository
     {
         public string ConnectionString { get; set; }
         public OrderRepository(string connectionString)
@@ -96,10 +96,8 @@ namespace Seller.DAL.Repositories
                                           ,[ShipRegion]
                                           ,[ShipPostalCode]
                                           ,[ShipCountry]
-                                          ,[ProductName]
-                                     FROM [dbo].[Orders] o INNER JOIN [dbo].[Order Details] od ON o.[OrderID]=od.[OrderID]
-                                                           INNER JOIN [dbo].[Products] p ON od.[ProductID]=p.[ProductID]
-                                     WHERE o.[OrderID] = @OrderID";
+                                     FROM [dbo].[Orders]
+                                     WHERE [OrderID] = @OrderID";
 
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
@@ -129,12 +127,6 @@ namespace Seller.DAL.Repositories
                                 ShipCountry = reader[12].ToString(),
                                 Status = string.IsNullOrEmpty(reader[2].ToString()) ? Status.New : string.IsNullOrEmpty(reader[4].ToString()) ? Status.InWork : Status.Completed
                             };
-
-                            do
-                            {
-                                order.ProductNames.Add(reader[13].ToString());
-                            } while (reader.Read());
-
                         }
                     };
                 }
@@ -234,14 +226,8 @@ namespace Seller.DAL.Repositories
                     connection.Open();
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        int orderId;
                         while (reader.Read())
                         {
-                            if (orderList.Any(o => o.OrderID == Convert.ToInt32(reader[0])))
-                            {
-                                orderList.FirstOrDefault(o => o.OrderID == Convert.ToInt32(reader[0])).ProductNames.Add(reader[14].ToString());
-                                continue;
-                            }
                             var order = new Order
                             {
                                 OrderID = Convert.ToInt32(reader[0]),
@@ -268,6 +254,44 @@ namespace Seller.DAL.Repositories
             }
 
             return orderList;
+        }
+
+        public void ChangeOrderStatusToInWork(int orderId, DateTime orderDate)
+        {
+            string queryString = @"UPDATE [dbo].[Orders]
+                                       SET [OrderDate] = @OrderDate
+                                     WHERE [OrderID] = @OrderID";
+
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                using (SqlCommand command = new SqlCommand(queryString, connection))
+                {
+                    command.Parameters.AddWithValue("@OrderID", orderId);
+                    command.Parameters.AddWithValue("@OrderDate", orderDate);
+
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void ChangeOrderStatusToCompleted(int orderId, DateTime shippedDate)
+        {
+            string queryString = @"UPDATE [dbo].[Orders]
+                                       SET [ShippedDate] = @ShippedDate
+                                     WHERE [OrderID] = @OrderID";
+
+            using (SqlConnection connection = new SqlConnection(ConnectionString))
+            {
+                using (SqlCommand command = new SqlCommand(queryString, connection))
+                {
+                    command.Parameters.AddWithValue("@OrderID", orderId);
+                    command.Parameters.AddWithValue("@ShippedDate", shippedDate);
+
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
         }
     }
 }

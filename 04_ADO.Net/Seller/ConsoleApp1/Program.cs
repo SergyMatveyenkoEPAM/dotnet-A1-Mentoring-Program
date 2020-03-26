@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using Seller.DAL.Models;
 using Seller.DAL.Repositories;
 
 namespace ConsoleApp1
@@ -13,8 +15,45 @@ namespace ConsoleApp1
 
 
             var _categoryRepository = new CategoryRepository(connectionString);
+            var category1  = _categoryRepository.GetById(1);
+            
+            var category = new Category
+            {
+                CategoryName = "Wild berries",
+                Description = "Natural product",
+                Picture = new byte[10]
+            };
+            int count = _categoryRepository.GetAll().Count();
 
-            var category = _categoryRepository.GetById(1);
+            _categoryRepository.Add(category);
+
+
+
+
+
+            var _orderStatisticRepository = new OrderInformationRepository(connectionString);
+            List<OrderHistory> orderHistoryList = _orderStatisticRepository.GetCustomerOrderHistory("VINET");
+            foreach (var orderHistory in orderHistoryList)
+            {
+                // Console.WriteLine(orderHistory.ProductName + " " + orderHistory.TotalQuantity);
+            }
+            List<CustomerOrderDetails> customerOrderDetailsList = _orderStatisticRepository.GetCustomerOrderDetails(10248);
+            foreach (var customerOrderDetails in customerOrderDetailsList)
+            {
+                // Console.WriteLine(customerOrderDetails.ProductName + " " + customerOrderDetails.UnitPrice + " " + customerOrderDetails.Quantity + " " + customerOrderDetails.Discount + " " + customerOrderDetails.ExtendedPrice);
+            }
+
+            List<FullOrderDetails> fullOrderDetailsList = _orderStatisticRepository.GetFullOrderDetails(10248);
+            foreach (var fullOrderDetails in fullOrderDetailsList)
+            {
+                foreach (var property in fullOrderDetails.GetType().GetProperties())
+                {
+                    Console.Write(property.GetValue(fullOrderDetails, null) + " ");
+                }
+
+                Console.WriteLine("------------");
+            }
+
 
 
 
@@ -30,7 +69,7 @@ namespace ConsoleApp1
             }
 
             Console.WriteLine("\n---------------------------------");
-            
+
             var res = orderRepository.GetById(11077);
             Console.WriteLine(res.OrderID.ToString());
             Console.WriteLine(res.CustomerID.ToString());
@@ -50,10 +89,7 @@ namespace ConsoleApp1
 
             Console.WriteLine("---------------------------------ProductNames---------------------------------");
 
-            foreach (var item in res.ProductNames)
-            {
-                Console.WriteLine(item);
-            }
+
 
             //  orderRepository.Add(res);
             /*res.OrderID = 11081;

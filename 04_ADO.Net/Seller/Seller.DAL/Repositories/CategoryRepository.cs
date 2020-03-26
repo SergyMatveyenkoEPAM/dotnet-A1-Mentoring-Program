@@ -31,7 +31,7 @@ namespace Seller.DAL.Repositories
                 {
                     command.Parameters.AddWithValue("@CategoryName", category.CategoryName);
                     command.Parameters.AddWithValue("@Description", category.Description);
-                    command.Parameters.AddWithValue("@Picture", GetRubbish(RubbishSize).Concat(category.Picture));
+                    command.Parameters.AddWithValue("@Picture", GetRubbish(RubbishSize).Concat(category.Picture).ToArray());
 
                     connection.Open();
                     command.ExecuteNonQuery();
@@ -146,7 +146,7 @@ namespace Seller.DAL.Repositories
                     command.Parameters.AddWithValue("@CategoryID", category.CategoryID);
                     command.Parameters.AddWithValue("@CategoryName", category.CategoryName);
                     command.Parameters.AddWithValue("@Description", category.Description);
-                    command.Parameters.AddWithValue("@Picture", GetRubbish(RubbishSize).Concat(category.Picture));
+                    command.Parameters.AddWithValue("@Picture", GetRubbish(RubbishSize).Concat(category.Picture).ToArray());
 
                     connection.Open();
                     command.ExecuteNonQuery();
