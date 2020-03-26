@@ -44,7 +44,7 @@ namespace Seller.DAL.Repositories
                     command.Parameters.AddWithValue("@ShipName", order.ShipName);
                     command.Parameters.AddWithValue("@ShipAddress", order.ShipAddress);
                     command.Parameters.AddWithValue("@ShipCity", order.ShipCity);
-                    command.Parameters.AddWithValue("@ShipRegion", order.ShipRegion);
+                    command.Parameters.AddWithValue("@ShipRegion", order.ShipRegion??"NULL");
                     command.Parameters.AddWithValue("@ShipPostalCode", order.ShipPostalCode);
                     command.Parameters.AddWithValue("@ShipCountry", order.ShipCountry);
 
@@ -200,7 +200,7 @@ namespace Seller.DAL.Repositories
         public IEnumerable<Order> GetAll()
         {
             var orderList = new List<Order>();
-            string queryString = @"SELECT o.[OrderID]
+            string queryString = @"SELECT [OrderID]
                                           ,[CustomerID]
                                           ,[EmployeeID]
                                           ,[OrderDate]
@@ -214,10 +214,7 @@ namespace Seller.DAL.Repositories
                                           ,[ShipRegion]
                                           ,[ShipPostalCode]
                                           ,[ShipCountry]
-                                          ,[ProductName]
-                                     FROM [dbo].[Orders] o INNER JOIN [dbo].[Order Details] od ON o.[OrderID]=od.[OrderID]
-                                                           INNER JOIN [dbo].[Products] p ON od.[ProductID]=p.[ProductID]
-                                     ORDER BY o.[OrderID]";
+                                     FROM [dbo].[Orders]";
 
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
