@@ -4,6 +4,7 @@ using Seller.DAL.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Seller.DAL.Interfaces;
 
 namespace Seller.DAL.Tests.UnitTests
 {
@@ -12,12 +13,14 @@ namespace Seller.DAL.Tests.UnitTests
     {
         private string connectionString;
         private Category category;
+        private IRepository<Category> _categoryRepository;
 
         [OneTimeSetUp]
         public void SetVariables()
         {
             // connectionString = ConfigurationManager.ConnectionStrings["NorthwindConnection"].ConnectionString;
             connectionString = @"Data Source = (localdb)\MSSQLLocalDB; Initial Catalog = Northwind; Integrated Security = True";
+            _categoryRepository = new CategoryRepository(connectionString);
             category = new Category
             {
                 CategoryName = "Wild berries",
@@ -29,9 +32,6 @@ namespace Seller.DAL.Tests.UnitTests
         [Test]
         public void Add_Category_CategoryCount()
         {
-
-            CategoryRepository _categoryRepository = new CategoryRepository(connectionString);
-
             int count = _categoryRepository.GetAll().Count();
 
             _categoryRepository.Add(category);
@@ -42,8 +42,6 @@ namespace Seller.DAL.Tests.UnitTests
         [Test]
         public void Delete_LastCategoryId_CategoryCount()
         {
-
-            CategoryRepository _categoryRepository = new CategoryRepository(connectionString);
             int categoryId = _categoryRepository.GetAll().LastOrDefault().CategoryID;
             int count = _categoryRepository.GetAll().Count();
 
@@ -55,7 +53,6 @@ namespace Seller.DAL.Tests.UnitTests
         [Test]
         public void GetAll_Categories_CategoryCount()
         {
-            CategoryRepository _categoryRepository = new CategoryRepository(connectionString);
             _categoryRepository.Add(category);
             _categoryRepository.Add(category);
 
@@ -67,8 +64,6 @@ namespace Seller.DAL.Tests.UnitTests
         [Test]
         public void GetById_LastCategoryId_True()
         {
-
-            CategoryRepository _categoryRepository = new CategoryRepository(connectionString);
             _categoryRepository.Add(category);
             int categoryId = _categoryRepository.GetAll().LastOrDefault().CategoryID;
 
@@ -83,7 +78,6 @@ namespace Seller.DAL.Tests.UnitTests
             string categoryName = "Can";
             string description = "Sea Can";
             byte[] picture = new byte[25];
-            CategoryRepository _categoryRepository = new CategoryRepository(connectionString);
             Category categoryFromRepository = _categoryRepository.GetAll().LastOrDefault();
             categoryFromRepository.CategoryName = categoryName;
             categoryFromRepository.Description = description;

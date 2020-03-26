@@ -5,6 +5,7 @@ using Seller.DAL.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Seller.DAL.Interfaces;
 
 namespace Seller.DAL.Tests.UnitTests
 {
@@ -13,12 +14,14 @@ namespace Seller.DAL.Tests.UnitTests
     {
         private string connectionString;
         private Order order;
+        private IOrderRepository _orderRepository;
 
         [OneTimeSetUp]
         public void SetVariables()
         {
             // connectionString = ConfigurationManager.ConnectionStrings["NorthwindConnection"].ConnectionString;
             connectionString = @"Data Source = (localdb)\MSSQLLocalDB; Initial Catalog = Northwind; Integrated Security = True";
+            _orderRepository = new OrderRepository(connectionString);
             order = new Order
             {
                 CustomerID = "VINET",
@@ -38,7 +41,6 @@ namespace Seller.DAL.Tests.UnitTests
         [Test]
         public void Add_Order_OrderCount()
         {
-            OrderRepository _orderRepository = new OrderRepository(connectionString);
             int count = _orderRepository.GetAll().Count();
 
             _orderRepository.Add(order);
@@ -49,7 +51,6 @@ namespace Seller.DAL.Tests.UnitTests
         [Test]
         public void Delete_Order_OrderCount()
         {
-            OrderRepository _orderRepository = new OrderRepository(connectionString);
             _orderRepository.Add(order);
             int count = _orderRepository.GetAll().Count();
             int orderId = _orderRepository.GetAll().LastOrDefault().OrderID;
@@ -64,7 +65,6 @@ namespace Seller.DAL.Tests.UnitTests
         [Test]
         public void Delete_NewOrder_GetProhibitedOperationException()
         {
-            OrderRepository _orderRepository = new OrderRepository(connectionString);
             _orderRepository.Add(order);
             int orderId = _orderRepository.GetAll().LastOrDefault().OrderID;
 
@@ -74,7 +74,6 @@ namespace Seller.DAL.Tests.UnitTests
         [Test]
         public void GetById_OrderId_True()
         {
-            OrderRepository _orderRepository = new OrderRepository(connectionString);
             _orderRepository.Add(order);
             int orderId = _orderRepository.GetAll().LastOrDefault().OrderID;
 
@@ -86,7 +85,6 @@ namespace Seller.DAL.Tests.UnitTests
         [Test]
         public void GetAll_Orders_OrderCount()
         {
-            OrderRepository _orderRepository = new OrderRepository(connectionString);
             _orderRepository.Add(order);
             _orderRepository.Add(order);
 
@@ -101,7 +99,7 @@ namespace Seller.DAL.Tests.UnitTests
             string shipCity = "Moskow";
             string shipCountry = "Russia";
             int employeeID = 1;
-            OrderRepository _orderRepository = new OrderRepository(connectionString);
+             
             Order orderFromRepository = _orderRepository.GetAll().LastOrDefault();
             orderFromRepository.ShipCity = shipCity;
             orderFromRepository.ShipCountry = shipCountry;
@@ -117,8 +115,6 @@ namespace Seller.DAL.Tests.UnitTests
         public void ChangeOrderStatusToInWork_OrderId_True()
         {
             var time = DateTime.Now.Date;
-            OrderRepository _orderRepository = new OrderRepository(connectionString);
-
             int orderId = _orderRepository.GetAll().LastOrDefault().OrderID;
             _orderRepository.ChangeOrderStatusToInWork(orderId, time);
 
@@ -132,8 +128,6 @@ namespace Seller.DAL.Tests.UnitTests
         public void ChangeOrderStatusToCompleted_OrderId_True()
         {
             var time = DateTime.Now.Date;
-            OrderRepository _orderRepository = new OrderRepository(connectionString);
-
             int orderId = _orderRepository.GetAll().LastOrDefault().OrderID;
             _orderRepository.ChangeOrderStatusToCompleted(orderId, time);
 

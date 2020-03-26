@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.29911.84
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Seller.DAL", "Seller.DAL\Seller.DAL.csproj", "{8DD8CC4B-C092-49AF-AF04-C945DE074295}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{9AA71BC3-81EE-47B5-ADFA-D3FE469D7D2D}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Seller.DAL.Tests", "Seller.DAL.Tests\Seller.DAL.Tests.csproj", "{2FF1444F-06F0-4E5F-A1C7-E6B49B7A0FCA}"
 EndProject
 Global
@@ -19,10 +17,6 @@ Global
 		{8DD8CC4B-C092-49AF-AF04-C945DE074295}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8DD8CC4B-C092-49AF-AF04-C945DE074295}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8DD8CC4B-C092-49AF-AF04-C945DE074295}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9AA71BC3-81EE-47B5-ADFA-D3FE469D7D2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9AA71BC3-81EE-47B5-ADFA-D3FE469D7D2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9AA71BC3-81EE-47B5-ADFA-D3FE469D7D2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9AA71BC3-81EE-47B5-ADFA-D3FE469D7D2D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2FF1444F-06F0-4E5F-A1C7-E6B49B7A0FCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2FF1444F-06F0-4E5F-A1C7-E6B49B7A0FCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2FF1444F-06F0-4E5F-A1C7-E6B49B7A0FCA}.Release|Any CPU.ActiveCfg = Release|Any CPU

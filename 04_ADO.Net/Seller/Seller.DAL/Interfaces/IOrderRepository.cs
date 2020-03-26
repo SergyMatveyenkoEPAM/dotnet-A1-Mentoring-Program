@@ -3,7 +3,7 @@ using System;
 
 namespace Seller.DAL.Interfaces
 {
-    interface IOrderRepository : IRepository<Order>
+    public interface IOrderRepository : IRepository<Order>
     {
         void ChangeOrderStatusToInWork(int orderId, DateTime orderDate);
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Seller.DAL.Interfaces
 {
-    interface IOrderInformationRepository
+    public interface IOrderInformationRepository
     {
         string ConnectionString { get; set; }
 

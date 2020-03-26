@@ -2,7 +2,7 @@
 
 namespace Seller.DAL.Interfaces
 {
-    interface IRepository<T>
+    public interface IRepository<T>
     {
         string ConnectionString { get; set; }
 
