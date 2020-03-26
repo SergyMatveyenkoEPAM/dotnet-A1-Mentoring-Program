@@ -18,7 +18,6 @@ namespace Seller.DAL.Tests.UnitTests
         [OneTimeSetUp]
         public void SetVariables()
         {
-            // connectionString = ConfigurationManager.ConnectionStrings["NorthwindConnection"].ConnectionString;
             connectionString = @"Data Source = (localdb)\MSSQLLocalDB; Initial Catalog = Northwind; Integrated Security = True";
             _categoryRepository = new CategoryRepository(connectionString);
             category = new Category

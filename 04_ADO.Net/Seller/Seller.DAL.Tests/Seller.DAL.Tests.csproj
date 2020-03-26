@@ -22,10 +22,4 @@
     <ProjectReference Include="..\Seller.DAL\Seller.DAL.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="App.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>
