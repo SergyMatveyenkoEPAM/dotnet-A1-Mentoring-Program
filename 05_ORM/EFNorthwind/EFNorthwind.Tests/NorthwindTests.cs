@@ -27,22 +27,5 @@ namespace EFNorthwind.Tests
                 Console.WriteLine("-----------------------------------------------");
             }
         }
-
-        [Test]
-        public void Test1()
-        {
-            using var context = new NorthwindContext();
-
-            foreach (var employee in context.Employees.Include(e => e.EmployeeTerritories).ThenInclude(et => et.Territory))
-            {
-                Console.WriteLine(employee.FirstName + " " + employee.Country);                
-                foreach (var employeeTerritory in employee.EmployeeTerritories)
-                {
-                    Console.WriteLine(employeeTerritory.Territory.TerritoryId + " " + employeeTerritory.Territory.TerritoryDescription);
-                }
-
-                Console.WriteLine("-----------------------------------------------");
-            }
-        }
     }
 }
