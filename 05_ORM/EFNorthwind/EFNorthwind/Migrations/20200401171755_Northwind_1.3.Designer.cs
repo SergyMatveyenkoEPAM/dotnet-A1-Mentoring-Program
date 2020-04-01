@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFNorthwind.Migrations
 {
     [DbContext(typeof(NorthwindContext))]
-    [Migration("20200401162130_Northwind_1.3")]
+    [Migration("20200401171755_Northwind_1.3")]
     partial class Northwind_13
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -46,22 +46,6 @@ namespace EFNorthwind.Migrations
                         .HasName("CategoryName");
 
                     b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            CategoryId = 1,
-                            CategoryName = "Can",
-                            Description = "Good can",
-                            Picture = new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
-                        },
-                        new
-                        {
-                            CategoryId = 2,
-                            CategoryName = "Car",
-                            Description = "Good car",
-                            Picture = new byte[] { 0, 0, 0, 0, 0 }
-                        });
                 });
 
             modelBuilder.Entity("EFNorthwind.Models.CreditCard", b =>
@@ -480,7 +464,7 @@ namespace EFNorthwind.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("EFNorthwind.Models.Regions", b =>
+            modelBuilder.Entity("EFNorthwind.Models.Region", b =>
                 {
                     b.Property<int>("RegionId")
                         .HasColumnName("RegionID")
@@ -495,7 +479,7 @@ namespace EFNorthwind.Migrations
                     b.HasKey("RegionId")
                         .HasAnnotation("SqlServer:Clustered", false);
 
-                    b.ToTable("Region");
+                    b.ToTable("Regions");
                 });
 
             modelBuilder.Entity("EFNorthwind.Models.Shippers", b =>
@@ -701,7 +685,7 @@ namespace EFNorthwind.Migrations
 
             modelBuilder.Entity("EFNorthwind.Models.Territories", b =>
                 {
-                    b.HasOne("EFNorthwind.Models.Regions", "Region")
+                    b.HasOne("EFNorthwind.Models.Region", "Region")
                         .WithMany("Territories")
                         .HasForeignKey("RegionId")
                         .HasConstraintName("FK_Territories_Region")

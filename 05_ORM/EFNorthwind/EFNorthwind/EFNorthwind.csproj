@@ -9,6 +9,10 @@
     <Compile Remove="Migrations\20200401123655_Northwind_1.1.Designer.cs" />
     <Compile Remove="Migrations\20200401131124_Northwind_1.3.cs" />
     <Compile Remove="Migrations\20200401131124_Northwind_1.3.Designer.cs" />
+    <Compile Remove="Migrations\20200401162130_Northwind_1.3.cs" />
+    <Compile Remove="Migrations\20200401162130_Northwind_1.3.Designer.cs" />
+    <Compile Remove="Migrations\20200401171452_Northwind_1.3.cs" />
+    <Compile Remove="Migrations\20200401171452_Northwind_1.3.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -24,7 +24,7 @@ namespace EFNorthwind.Models
         public virtual DbSet<OrderDetails> OrderDetails { get; set; }
         public virtual DbSet<Orders> Orders { get; set; }
         public virtual DbSet<Products> Products { get; set; }
-        public virtual DbSet<Regions> Region { get; set; }
+        public virtual DbSet<Region> Regions { get; set; }
         public virtual DbSet<Shippers> Shippers { get; set; }
         public virtual DbSet<Suppliers> Suppliers { get; set; }
         public virtual DbSet<Territories> Territories { get; set; }
@@ -34,7 +34,7 @@ namespace EFNorthwind.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source = (localdb)\\MSSQLLocalDB; Initial Catalog = Northwind; Integrated Security = True");
+                optionsBuilder.UseSqlServer("Data Source = (localdb)\\MSSQLLocalDB; Initial Catalog = Northwind5; Integrated Security = True");
             }
         }
 
@@ -372,8 +372,10 @@ namespace EFNorthwind.Models
                     .HasConstraintName("FK_Products_Suppliers");
             });
 
-            modelBuilder.Entity<Regions>(entity =>
+            modelBuilder.Entity<Region>(entity =>
             {
+                entity.ToTable("Regions");
+
                 entity.HasKey(e => e.RegionId)
                     .IsClustered(false);
 
@@ -387,8 +389,8 @@ namespace EFNorthwind.Models
                     .IsFixedLength();
             });
 
-            modelBuilder.Entity<Regions>().HasData(new Regions { RegionId = 100, RegionDescription = "Gomel district" },
-                new Regions { RegionId = 101, RegionDescription = "Minsk district" });
+            modelBuilder.Entity<Region>().HasData(new Region { RegionId = 100, RegionDescription = "Gomel district" },
+                new Region { RegionId = 101, RegionDescription = "Minsk district" });
 
             modelBuilder.Entity<Shippers>(entity =>
             {
