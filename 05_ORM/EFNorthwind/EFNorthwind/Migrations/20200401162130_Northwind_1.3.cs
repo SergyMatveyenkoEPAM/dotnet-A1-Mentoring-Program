@@ -11,6 +11,7 @@ namespace EFNorthwind.Migrations
                 name: "EstablishmentDate",
                 table: "Customers",
                 nullable: true);
+            
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

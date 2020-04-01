@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFNorthwind.Migrations
 {
     [DbContext(typeof(NorthwindContext))]
-    [Migration("20200401131836_Northwind_1.3")]
+    [Migration("20200401162130_Northwind_1.3")]
     partial class Northwind_13
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -46,6 +46,22 @@ namespace EFNorthwind.Migrations
                         .HasName("CategoryName");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = 1,
+                            CategoryName = "Can",
+                            Description = "Good can",
+                            Picture = new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            CategoryName = "Car",
+                            Description = "Good car",
+                            Picture = new byte[] { 0, 0, 0, 0, 0 }
+                        });
                 });
 
             modelBuilder.Entity("EFNorthwind.Models.CreditCard", b =>

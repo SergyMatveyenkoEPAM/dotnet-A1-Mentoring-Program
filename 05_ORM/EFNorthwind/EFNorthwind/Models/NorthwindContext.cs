@@ -59,6 +59,8 @@ namespace EFNorthwind.Models
                 entity.Property(e => e.Picture).HasColumnType("image");
             });
 
+            modelBuilder.Entity<Categories>().HasData(new Categories { CategoryId = 100, CategoryName = "Can", Description = "Good can", Picture = new byte[10] }, new Categories { CategoryId = 101, CategoryName = "Car", Description = "Good car", Picture = new byte[5] });
+
             modelBuilder.Entity<CustomerCustomerDemo>(entity =>
             {
                 entity.HasKey(e => new { e.CustomerId, e.CustomerTypeId })
@@ -386,6 +388,9 @@ namespace EFNorthwind.Models
                     .IsFixedLength();
             });
 
+            modelBuilder.Entity<Regions>().HasData(new Regions { RegionId = 100, RegionDescription = "Gomel district" },
+                new Regions { RegionId = 101, RegionDescription = "Minsk district" });
+
             modelBuilder.Entity<Shippers>(entity =>
             {
                 entity.HasKey(e => e.ShipperId);
@@ -458,6 +463,9 @@ namespace EFNorthwind.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Territories_Region");
             });
+
+            modelBuilder.Entity<Territories>().HasData(new Territories { TerritoryId = "1", RegionId = 100, TerritoryDescription = "Gomel" },
+                new Territories { TerritoryId = "2", RegionId = 101, TerritoryDescription = "Minsk" });
 
             OnModelCreatingPartial(modelBuilder);
         }

@@ -44,6 +44,22 @@ namespace EFNorthwind.Migrations
                         .HasName("CategoryName");
 
                     b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = 1,
+                            CategoryName = "Can",
+                            Description = "Good can",
+                            Picture = new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            CategoryName = "Car",
+                            Description = "Good car",
+                            Picture = new byte[] { 0, 0, 0, 0, 0 }
+                        });
                 });
 
             modelBuilder.Entity("EFNorthwind.Models.CreditCard", b =>
