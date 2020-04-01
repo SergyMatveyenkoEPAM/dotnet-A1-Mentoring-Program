@@ -16,16 +16,19 @@ namespace EFNorthwind.Models
         }
 
         public virtual DbSet<Categories> Categories { get; set; }
+        public virtual DbSet<CustomerCustomerDemo> CustomerCustomerDemo { get; set; }
         public virtual DbSet<CustomerDemographics> CustomerDemographics { get; set; }
         public virtual DbSet<Customers> Customers { get; set; }
+        public virtual DbSet<EmployeeTerritories> EmployeeTerritories { get; set; }
         public virtual DbSet<Employees> Employees { get; set; }
         public virtual DbSet<OrderDetails> OrderDetails { get; set; }
         public virtual DbSet<Orders> Orders { get; set; }
         public virtual DbSet<Products> Products { get; set; }
-        public virtual DbSet<Region> Region { get; set; }
+        public virtual DbSet<Regions> Region { get; set; }
         public virtual DbSet<Shippers> Shippers { get; set; }
         public virtual DbSet<Suppliers> Suppliers { get; set; }
         public virtual DbSet<Territories> Territories { get; set; }
+        public virtual DbSet<CreditCard> CreditCards { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -54,6 +57,34 @@ namespace EFNorthwind.Models
                 entity.Property(e => e.Description).HasColumnType("ntext");
 
                 entity.Property(e => e.Picture).HasColumnType("image");
+            });
+
+            modelBuilder.Entity<CustomerCustomerDemo>(entity =>
+            {
+                entity.HasKey(e => new { e.CustomerId, e.CustomerTypeId })
+                    .IsClustered(false);
+
+                entity.Property(e => e.CustomerId)
+                    .HasColumnName("CustomerID")
+                    .HasMaxLength(5)
+                    .IsFixedLength();
+
+                entity.Property(e => e.CustomerTypeId)
+                    .HasColumnName("CustomerTypeID")
+                    .HasMaxLength(10)
+                    .IsFixedLength();
+
+                entity.HasOne(d => d.Customer)
+                    .WithMany(p => p.CustomerCustomerDemo)
+                    .HasForeignKey(d => d.CustomerId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_CustomerCustomerDemo_Customers");
+
+                entity.HasOne(d => d.CustomerType)
+                    .WithMany(p => p.CustomerCustomerDemo)
+                    .HasForeignKey(d => d.CustomerTypeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_CustomerCustomerDemo");
             });
 
             modelBuilder.Entity<CustomerDemographics>(entity =>
@@ -111,6 +142,30 @@ namespace EFNorthwind.Models
                 entity.Property(e => e.PostalCode).HasMaxLength(10);
 
                 entity.Property(e => e.Region).HasMaxLength(15);
+            });
+
+            modelBuilder.Entity<EmployeeTerritories>(entity =>
+            {
+                entity.HasKey(e => new { e.EmployeeId, e.TerritoryId })
+                    .IsClustered(false);
+
+                entity.Property(e => e.EmployeeId).HasColumnName("EmployeeID");
+
+                entity.Property(e => e.TerritoryId)
+                    .HasColumnName("TerritoryID")
+                    .HasMaxLength(20);
+
+                entity.HasOne(d => d.Employee)
+                    .WithMany(p => p.EmployeeTerritories)
+                    .HasForeignKey(d => d.EmployeeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_EmployeeTerritories_Employees");
+
+                entity.HasOne(d => d.Territory)
+                    .WithMany(p => p.EmployeeTerritories)
+                    .HasForeignKey(d => d.TerritoryId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_EmployeeTerritories_Territories");
             });
 
             modelBuilder.Entity<Employees>(entity =>
@@ -316,7 +371,7 @@ namespace EFNorthwind.Models
                     .HasConstraintName("FK_Products_Suppliers");
             });
 
-            modelBuilder.Entity<Region>(entity =>
+            modelBuilder.Entity<Regions>(entity =>
             {
                 entity.HasKey(e => e.RegionId)
                     .IsClustered(false);

@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200401123655_Northwind_1.1.cs" />
+    <Compile Remove="Migrations\20200401123655_Northwind_1.1.Designer.cs" />
+    <Compile Remove="Migrations\20200401131124_Northwind_1.3.cs" />
+    <Compile Remove="Migrations\20200401131124_Northwind_1.3.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.3">
       <PrivateAssets>all</PrivateAssets>

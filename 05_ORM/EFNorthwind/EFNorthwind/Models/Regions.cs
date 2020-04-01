@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace EFNorthwind.Models
 {
-    public partial class Region
+    public partial class Regions
     {
-        public Region()
+        public Regions()
         {
             Territories = new HashSet<Territories>();
         }

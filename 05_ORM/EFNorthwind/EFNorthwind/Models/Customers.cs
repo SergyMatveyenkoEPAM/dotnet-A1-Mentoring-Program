@@ -7,6 +7,7 @@ namespace EFNorthwind.Models
     {
         public Customers()
         {
+            CustomerCustomerDemo = new HashSet<CustomerCustomerDemo>();
             Orders = new HashSet<Orders>();
         }
 
@@ -21,7 +22,9 @@ namespace EFNorthwind.Models
         public string Country { get; set; }
         public string Phone { get; set; }
         public string Fax { get; set; }
+        public DateTime? EstablishmentDate { get; set; }
 
+        public virtual ICollection<CustomerCustomerDemo> CustomerCustomerDemo { get; set; }
         public virtual ICollection<Orders> Orders { get; set; }
     }
 }

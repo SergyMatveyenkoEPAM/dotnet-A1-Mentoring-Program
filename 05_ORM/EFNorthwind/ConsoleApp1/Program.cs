@@ -10,6 +10,7 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             using var context = new NorthwindContext();
+            context.Database.EnsureCreated();
             foreach (var order in context.Orders.Include(o => o.OrderDetails).ThenInclude(od => od.Product).ThenInclude(p => p.Category).Where(o => o.OrderDetails.Any(od => od.Product.Category.CategoryName == "Condiments")))
             {
                 Console.WriteLine(order.OrderId + " " + order.OrderDate + " " + order.ShipCity + " " + order.ShipCountry + " " + order.OrderDetails?.FirstOrDefault()?.Product.ProductName + " " + order.OrderDetails?.FirstOrDefault()?.Product.Category.CategoryName);
