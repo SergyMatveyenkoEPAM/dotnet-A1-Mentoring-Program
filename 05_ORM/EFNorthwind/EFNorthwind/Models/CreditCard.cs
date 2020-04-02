@@ -9,6 +9,6 @@ namespace EFNorthwind.Models
         public DateTime ExpiryDate { get; set; }
         public string CardHolder { get; set; }
 
-        public virtual Employees Employee { get; set; }
+        public virtual Employee Employee { get; set; }
     }
 }

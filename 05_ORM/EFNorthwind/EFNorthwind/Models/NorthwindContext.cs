@@ -15,32 +15,32 @@ namespace EFNorthwind.Models
         {
         }
 
-        public virtual DbSet<Categories> Categories { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<CustomerCustomerDemo> CustomerCustomerDemo { get; set; }
-        public virtual DbSet<CustomerDemographics> CustomerDemographics { get; set; }
-        public virtual DbSet<Customers> Customers { get; set; }
+        public virtual DbSet<CustomerDemographic> CustomerDemographics { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<EmployeeTerritories> EmployeeTerritories { get; set; }
-        public virtual DbSet<Employees> Employees { get; set; }
+        public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<OrderDetails> OrderDetails { get; set; }
-        public virtual DbSet<Orders> Orders { get; set; }
-        public virtual DbSet<Products> Products { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Region> Regions { get; set; }
-        public virtual DbSet<Shippers> Shippers { get; set; }
-        public virtual DbSet<Suppliers> Suppliers { get; set; }
-        public virtual DbSet<Territories> Territories { get; set; }
+        public virtual DbSet<Shipper> Shippers { get; set; }
+        public virtual DbSet<Supplier> Suppliers { get; set; }
+        public virtual DbSet<Territory> Territories { get; set; }
         public virtual DbSet<CreditCard> CreditCards { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source = (localdb)\\MSSQLLocalDB; Initial Catalog = Northwind5; Integrated Security = True");
+                optionsBuilder.UseSqlServer("Data Source = (localdb)\\MSSQLLocalDB; Initial Catalog = Northwind; Integrated Security = True");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Categories>(entity =>
+            modelBuilder.Entity<Category>(entity =>
             {
                 entity.HasKey(e => e.CategoryId);
 
@@ -57,8 +57,6 @@ namespace EFNorthwind.Models
 
                 entity.Property(e => e.Picture).HasColumnType("image");
             });
-
-            modelBuilder.Entity<Categories>().HasData(new Categories { CategoryId = 100, CategoryName = "Can", Description = "Good can", Picture = new byte[10] }, new Categories { CategoryId = 101, CategoryName = "Car", Description = "Good car", Picture = new byte[5] });
 
             modelBuilder.Entity<CustomerCustomerDemo>(entity =>
             {
@@ -88,7 +86,7 @@ namespace EFNorthwind.Models
                     .HasConstraintName("FK_CustomerCustomerDemo");
             });
 
-            modelBuilder.Entity<CustomerDemographics>(entity =>
+            modelBuilder.Entity<CustomerDemographic>(entity =>
             {
                 entity.HasKey(e => e.CustomerTypeId)
                     .IsClustered(false);
@@ -101,7 +99,7 @@ namespace EFNorthwind.Models
                 entity.Property(e => e.CustomerDesc).HasColumnType("ntext");
             });
 
-            modelBuilder.Entity<Customers>(entity =>
+            modelBuilder.Entity<Customer>(entity =>
             {
                 entity.HasKey(e => e.CustomerId);
 
@@ -169,7 +167,7 @@ namespace EFNorthwind.Models
                     .HasConstraintName("FK_EmployeeTerritories_Territories");
             });
 
-            modelBuilder.Entity<Employees>(entity =>
+            modelBuilder.Entity<Employee>(entity =>
             {
                 entity.HasKey(e => e.EmployeeId);
 
@@ -257,7 +255,7 @@ namespace EFNorthwind.Models
                     .HasConstraintName("FK_Order_Details_Products");
             });
 
-            modelBuilder.Entity<Orders>(entity =>
+            modelBuilder.Entity<Order>(entity =>
             {
                 entity.HasKey(e => e.OrderId);
 
@@ -326,7 +324,7 @@ namespace EFNorthwind.Models
                     .HasConstraintName("FK_Orders_Shippers");
             });
 
-            modelBuilder.Entity<Products>(entity =>
+            modelBuilder.Entity<Product>(entity =>
             {
                 entity.HasKey(e => e.ProductId);
 
@@ -389,10 +387,7 @@ namespace EFNorthwind.Models
                     .IsFixedLength();
             });
 
-            modelBuilder.Entity<Region>().HasData(new Region { RegionId = 100, RegionDescription = "Gomel district" },
-                new Region { RegionId = 101, RegionDescription = "Minsk district" });
-
-            modelBuilder.Entity<Shippers>(entity =>
+            modelBuilder.Entity<Shipper>(entity =>
             {
                 entity.HasKey(e => e.ShipperId);
 
@@ -405,7 +400,7 @@ namespace EFNorthwind.Models
                 entity.Property(e => e.Phone).HasMaxLength(24);
             });
 
-            modelBuilder.Entity<Suppliers>(entity =>
+            modelBuilder.Entity<Supplier>(entity =>
             {
                 entity.HasKey(e => e.SupplierId);
 
@@ -442,7 +437,7 @@ namespace EFNorthwind.Models
                 entity.Property(e => e.Region).HasMaxLength(15);
             });
 
-            modelBuilder.Entity<Territories>(entity =>
+            modelBuilder.Entity<Territory>(entity =>
             {
                 entity.HasKey(e => e.TerritoryId)
                     .IsClustered(false);
@@ -464,9 +459,6 @@ namespace EFNorthwind.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Territories_Region");
             });
-
-            modelBuilder.Entity<Territories>().HasData(new Territories { TerritoryId = "1", RegionId = 100, TerritoryDescription = "Gomel" },
-                new Territories { TerritoryId = "2", RegionId = 101, TerritoryDescription = "Minsk" });
 
             OnModelCreatingPartial(modelBuilder);
         }

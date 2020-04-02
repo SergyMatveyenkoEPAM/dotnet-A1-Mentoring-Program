@@ -433,6 +433,34 @@ namespace EFNorthwind.Migrations
                 name: "IX_Territories_RegionID",
                 table: "Territories",
                 column: "RegionID");
+
+            migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "CategoryID", "CategoryName", "Description", "Picture" },
+                values: new object[,]
+                {
+                    { 100, "Can", "Good can", new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } },
+                    { 101, "Car", "Good car", new byte[] { 0, 0, 0, 0, 0 } }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Region",
+                columns: new[] { "RegionID", "RegionDescription" },
+                values: new object[,]
+                {
+                    { 100, "Gomel district" },
+                    { 101, "Minsk district" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Territories",
+                columns: new[] { "TerritoryID", "RegionID", "TerritoryDescription" },
+                values: new object[] { "1", 100, "Gomel" });
+
+            migrationBuilder.InsertData(
+                table: "Territories",
+                columns: new[] { "TerritoryID", "RegionID", "TerritoryDescription" },
+                values: new object[] { "2", 101, "Minsk" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -475,6 +503,36 @@ namespace EFNorthwind.Migrations
 
             migrationBuilder.DropTable(
                 name: "Suppliers");
+
+            migrationBuilder.DeleteData(
+                table: "Categories",
+                keyColumn: "CategoryID",
+                keyValue: 100);
+
+            migrationBuilder.DeleteData(
+                table: "Categories",
+                keyColumn: "CategoryID",
+                keyValue: 101);
+
+            migrationBuilder.DeleteData(
+                table: "Territories",
+                keyColumn: "TerritoryID",
+                keyValue: "1");
+
+            migrationBuilder.DeleteData(
+                table: "Territories",
+                keyColumn: "TerritoryID",
+                keyValue: "2");
+
+            migrationBuilder.DeleteData(
+                table: "Region",
+                keyColumn: "RegionID",
+                keyValue: 100);
+
+            migrationBuilder.DeleteData(
+                table: "Region",
+                keyColumn: "RegionID",
+                keyValue: 101);
         }
     }
 }

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace EFNorthwind.Models
 {
-    public partial class Orders
+    public partial class Order
     {
-        public Orders()
+        public Order()
         {
             OrderDetails = new HashSet<OrderDetails>();
         }
@@ -25,9 +25,9 @@ namespace EFNorthwind.Models
         public string ShipPostalCode { get; set; }
         public string ShipCountry { get; set; }
 
-        public virtual Customers Customer { get; set; }
-        public virtual Employees Employee { get; set; }
-        public virtual Shippers ShipViaNavigation { get; set; }
+        public virtual Customer Customer { get; set; }
+        public virtual Employee Employee { get; set; }
+        public virtual Shipper ShipViaNavigation { get; set; }
         public virtual ICollection<OrderDetails> OrderDetails { get; set; }
     }
 }

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace EFNorthwind.Models
 {
-    public partial class CustomerDemographics
+    public partial class CustomerDemographic
     {
-        public CustomerDemographics()
+        public CustomerDemographic()
         {
             CustomerCustomerDemo = new HashSet<CustomerCustomerDemo>();
         }

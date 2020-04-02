@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace EFNorthwind.Models
 {
-    public partial class Suppliers
+    public partial class Supplier
     {
-        public Suppliers()
+        public Supplier()
         {
-            Products = new HashSet<Products>();
+            Products = new HashSet<Product>();
         }
 
         public int SupplierId { get; set; }
@@ -23,6 +23,6 @@ namespace EFNorthwind.Models
         public string Fax { get; set; }
         public string HomePage { get; set; }
 
-        public virtual ICollection<Products> Products { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

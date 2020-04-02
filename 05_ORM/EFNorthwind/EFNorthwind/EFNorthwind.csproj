@@ -13,6 +13,12 @@
     <Compile Remove="Migrations\20200401162130_Northwind_1.3.Designer.cs" />
     <Compile Remove="Migrations\20200401171452_Northwind_1.3.cs" />
     <Compile Remove="Migrations\20200401171452_Northwind_1.3.Designer.cs" />
+    <Compile Remove="Migrations\20200402095531_Northwind_1.4.cs" />
+    <Compile Remove="Migrations\20200402095531_Northwind_1.4.Designer.cs" />
+    <Compile Remove="Migrations\20200402100911_Northwind_1.4.cs" />
+    <Compile Remove="Migrations\20200402100911_Northwind_1.4.Designer.cs" />
+    <Compile Remove="Migrations\20200402100937_Northwind_1.5.cs" />
+    <Compile Remove="Migrations\20200402100937_Northwind_1.5.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
