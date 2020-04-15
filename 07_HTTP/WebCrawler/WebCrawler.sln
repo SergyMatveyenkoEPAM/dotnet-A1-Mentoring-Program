@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30002.166
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCrawler", "WebCrawler\WebCrawler.csproj", "{19C86CDE-46A5-4294-8E2E-59127CE277B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{FA819E4C-FA18-4CDD-A6E9-AC419B313A06}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{19C86CDE-46A5-4294-8E2E-59127CE277B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19C86CDE-46A5-4294-8E2E-59127CE277B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19C86CDE-46A5-4294-8E2E-59127CE277B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19C86CDE-46A5-4294-8E2E-59127CE277B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA819E4C-FA18-4CDD-A6E9-AC419B313A06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA819E4C-FA18-4CDD-A6E9-AC419B313A06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA819E4C-FA18-4CDD-A6E9-AC419B313A06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA819E4C-FA18-4CDD-A6E9-AC419B313A06}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {39D495F4-F5FD-4BC3-862B-DA4DA2104B4D}
+	EndGlobalSection
+EndGlobal
