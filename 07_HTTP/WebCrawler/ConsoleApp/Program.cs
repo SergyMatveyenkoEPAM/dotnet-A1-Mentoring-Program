@@ -8,10 +8,12 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
-            var crawler = new Crawler(0,AreaRestriction.CurrentDomainOnly,null,true);
-            crawler.TraceMessage+=(sender,e)=>Console.WriteLine(e.Message);
+            var crawler = new Crawler(1, AreaRestriction.CurrentDomainOnly, null, true);
+            crawler.TraceMessage += (sender, e) => Console.WriteLine(e.Message);
 
-            crawler.GetSiteData("https://gomel.today/", @"D:\_Here we go");
+            crawler.GetSiteData("https://stackoverflow.com/questions/56107/what-is-the-best-way-to-parse-html-in-c", @"D:\_Here we go");
+           // crawler.GetSiteData("https://www.bbc.com/russian/", @"D:\_Here we go");
+            // crawler.GetSiteData("https://www.bbc.com", @"D:\_Here we go");
 
 
         }
