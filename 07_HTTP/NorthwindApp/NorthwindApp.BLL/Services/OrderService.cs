@@ -19,7 +19,7 @@ namespace NorthwindApp.BLL.Services
 
         public XLWorkbook GetOrdersReport(string customerId, DateTime? dateFrom, DateTime? dateTo, int? take, int? skip)
         {
-            var orders = _repository.GetAll();
+            var orders = _repository.GetAll().AsEnumerable();
 
             if (orders == null && !orders.Any())
             {

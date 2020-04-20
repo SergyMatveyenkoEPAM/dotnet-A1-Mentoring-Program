@@ -23,10 +23,8 @@ namespace NorthwindApp
             DateTime? dateTo = Convert.ToDateTime(request.QueryString["dateTo"]);
             int? take = Convert.ToInt32(request.QueryString["take"]);
             int? skip = Convert.ToInt32(request.QueryString["skip"]);
-
-
             
-            var workbook = service.GetOrdersReport(null, null, null, 10, null);
+            var workbook = service.GetOrdersReport(customerId, dateFrom, dateTo, take, skip);
             response.Clear();
             response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
             using (MemoryStream memoryStream = new MemoryStream())
