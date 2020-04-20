@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using NorthwindApp.BLL.Interfaces;
@@ -15,25 +16,27 @@ namespace NorthwindApp
         {
             var request = context.Request;
             var response = context.Response;
-
-            if (request.Url.PathAndQuery == "/~close")
-                return;
-
-            var name = request.QueryString["name"];
-
-            var answerString = string.IsNullOrEmpty(name) ?
-                "Hello, Anonymouse!" : $"Hello, {name}";
-
-            // NorthwindDB _db=new NorthwindDB();
             IOrderService service = new OrderService();
 
-            var res = service.GetAll().Take(10).Select(o => o.ShipName);
+            string customerId = request.QueryString["customerId"];
+            DateTime? dateFrom = Convert.ToDateTime(request.QueryString["dateFrom"]);
+            DateTime? dateTo = Convert.ToDateTime(request.QueryString["dateTo"]);
+            int? take = Convert.ToInt32(request.QueryString["take"]);
+            int? skip = Convert.ToInt32(request.QueryString["skip"]);
 
-            foreach (var r in res)
+
+            
+            var workbook = service.GetOrdersReport(null, null, null, 10, null);
+            response.Clear();
+            response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            using (MemoryStream memoryStream = new MemoryStream())
             {
-                response.Output.WriteLine(r+"<br/>");
+                workbook.SaveAs(memoryStream);
+                memoryStream.WriteTo(response.OutputStream);
+                memoryStream.Close();
             }
-            response.Output.WriteLine(answerString);
+
+            response.End();
         }
     }
 }

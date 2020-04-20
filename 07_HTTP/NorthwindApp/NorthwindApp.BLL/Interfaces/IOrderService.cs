@@ -1,10 +1,10 @@
-﻿using NorthwindApp.BLL.Models;
-using System.Collections.Generic;
+﻿using ClosedXML.Excel;
+using System;
 
 namespace NorthwindApp.BLL.Interfaces
 {
     public interface IOrderService
     {
-        IEnumerable<OrderDTO> GetAll();
+        XLWorkbook GetOrdersReport(string customerId, DateTime? dateFrom, DateTime? dateTo, int? take, int? skip);
     }
 }
