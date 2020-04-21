@@ -4,6 +4,7 @@ using NorthwindApp.DAL.Interfaces;
 using NorthwindApp.DAL.Models;
 using NorthwindApp.DAL.Repositories;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace NorthwindApp.BLL.Services
@@ -21,7 +22,7 @@ namespace NorthwindApp.BLL.Services
         {
             var orders = _repository.GetAll().AsEnumerable();
 
-            if (orders == null && !orders.Any())
+            if (orders == null || !orders.Any())
             {
                 return null;
             }
@@ -41,6 +42,13 @@ namespace NorthwindApp.BLL.Services
 
             orders = skip == null ? orders : orders.Skip((int)skip);
 
+            XLWorkbook workbook = CreateExcelFile(orders.OrderBy(o => o.OrderID));
+
+            return workbook;
+        }
+
+        private XLWorkbook CreateExcelFile(IEnumerable<Order> orders)
+        {
             var workbook = new XLWorkbook();
             var worksheet = workbook.Worksheets.Add("Report");
             worksheet.Cell(1, 1).Value = nameof(Order.OrderID);
@@ -57,7 +65,7 @@ namespace NorthwindApp.BLL.Services
             worksheet.Cell(1, 12).Value = nameof(Order.ShipRegion);
             worksheet.Cell(1, 13).Value = nameof(Order.ShipPostalCode);
             worksheet.Cell(1, 14).Value = nameof(Order.ShipCountry);
-            
+
             int i = 1;
             foreach (var order in orders)
             {

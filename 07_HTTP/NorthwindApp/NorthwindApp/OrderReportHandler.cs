@@ -19,22 +19,30 @@ namespace NorthwindApp
             IOrderService service = new OrderService();
 
             string customerId = request.QueryString["customerId"];
-            DateTime? dateFrom = Convert.ToDateTime(request.QueryString["dateFrom"]);
-            DateTime? dateTo = Convert.ToDateTime(request.QueryString["dateTo"]);
-            int? take = Convert.ToInt32(request.QueryString["take"]);
-            int? skip = Convert.ToInt32(request.QueryString["skip"]);
-            
-            var workbook = service.GetOrdersReport(customerId, dateFrom, dateTo, take, skip);
-            response.Clear();
-            response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-            using (MemoryStream memoryStream = new MemoryStream())
-            {
-                workbook.SaveAs(memoryStream);
-                memoryStream.WriteTo(response.OutputStream);
-                memoryStream.Close();
-            }
+            DateTime? dateFrom = string.IsNullOrEmpty(request.QueryString["dateFrom"]) ? (DateTime?)null : Convert.ToDateTime(request.QueryString["dateFrom"]);
+            DateTime? dateTo = string.IsNullOrEmpty(request.QueryString["dateTo"]) ? (DateTime?)null : Convert.ToDateTime(request.QueryString["dateTo"]);
+            int? take = string.IsNullOrEmpty(request.QueryString["take"]) ? (int?)null : Convert.ToInt32(request.QueryString["take"]);
+            int? skip = string.IsNullOrEmpty(request.QueryString["skip"]) ? (int?)null : Convert.ToInt32(request.QueryString["skip"]);
 
-            response.End();
+            if (request.Headers["Accept"] != "text/xml" && request.Headers["Accept"] != "application/xml")
+            {
+                var workbook = service.GetOrdersReport(customerId, dateFrom, dateTo, take, skip);
+                if (workbook != null)
+                {
+                    response.Clear();
+                    response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                    response.AddHeader("content-disposition", "attachment;filename=\"OrdersReport.xlsx\"");
+
+                    using (MemoryStream memoryStream = new MemoryStream())
+                    {
+                        workbook.SaveAs(memoryStream);
+                        memoryStream.WriteTo(response.OutputStream);
+                        memoryStream.Close();
+                    }
+
+                    response.End();
+                }
+            }
         }
     }
 }
