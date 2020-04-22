@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Web;
-using NorthwindApp.BLL.Interfaces;
+﻿using NorthwindApp.BLL.Interfaces;
 using NorthwindApp.BLL.Services;
+using System;
+using System.IO;
+using System.Web;
 
 namespace NorthwindApp
 {
@@ -24,7 +22,18 @@ namespace NorthwindApp
             int? take = string.IsNullOrEmpty(request.QueryString["take"]) ? (int?)null : Convert.ToInt32(request.QueryString["take"]);
             int? skip = string.IsNullOrEmpty(request.QueryString["skip"]) ? (int?)null : Convert.ToInt32(request.QueryString["skip"]);
 
-            if (request.Headers["Accept"] != "text/xml" && request.Headers["Accept"] != "application/xml")
+            if (request.Headers["Accept"] == "text/xml" || request.Headers["Accept"] == "application/xml")
+            {
+                var ordersStream = service.GetXmlOrdersReport(customerId, dateFrom, dateTo, take, skip);
+
+                ordersStream.WriteTo(response.OutputStream);
+
+                response.ContentType = "text/xml";
+
+                response.Flush();
+                response.End();
+            }
+            else
             {
                 var workbook = service.GetOrdersReport(customerId, dateFrom, dateTo, take, skip);
                 if (workbook != null)

@@ -5,7 +5,10 @@ using NorthwindApp.DAL.Models;
 using NorthwindApp.DAL.Repositories;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace NorthwindApp.BLL.Services
 {
@@ -19,6 +22,59 @@ namespace NorthwindApp.BLL.Services
         }
 
         public XLWorkbook GetOrdersReport(string customerId, DateTime? dateFrom, DateTime? dateTo, int? take, int? skip)
+        {
+            IEnumerable<Order> orders = FilterOrders(customerId, dateFrom, dateTo, take, skip);
+
+            XLWorkbook workbook = CreateExcelFile(orders.OrderBy(o => o.OrderID));
+
+            return workbook;
+        }
+
+        public MemoryStream GetXmlOrdersReport(string customerId, DateTime? dateFrom, DateTime? dateTo, int? take, int? skip)
+        {
+            IEnumerable<Order> orders = FilterOrders(customerId, dateFrom, dateTo, take, skip);
+
+            //MemoryStream stream = new MemoryStream();
+            //var formatter = new XmlSerializer(typeof(List<Order>));
+
+            //formatter.Serialize(stream, orders.ToList());
+            //return stream;
+
+
+            MemoryStream memoryStream = new MemoryStream();
+            XmlWriter writer = XmlWriter.Create(memoryStream);
+
+            writer.WriteStartDocument();
+            writer.WriteStartElement("orders");
+
+            foreach (var order in orders)
+            {
+                writer.WriteStartElement("order");
+                writer.WriteElementString(nameof(Order.OrderID).ToLower(), order.OrderID.ToString());
+                writer.WriteElementString(nameof(Order.CustomerID).ToLower(), order.CustomerID);
+                writer.WriteElementString(nameof(Order.EmployeeID).ToLower(), order.EmployeeID.ToString());
+                writer.WriteElementString(nameof(Order.OrderDate).ToLower(), order.OrderDate.ToString());
+                writer.WriteElementString(nameof(Order.RequiredDate).ToLower(), order.RequiredDate.ToString());
+                writer.WriteElementString(nameof(Order.ShippedDate).ToLower(), order.ShippedDate.ToString());
+                writer.WriteElementString(nameof(Order.ShipVia).ToLower(), order.ShipVia.ToString());
+                writer.WriteElementString(nameof(Order.Freight).ToLower(), order.Freight.ToString());
+                writer.WriteElementString(nameof(Order.ShipName).ToLower(), order.ShipName);
+                writer.WriteElementString(nameof(Order.ShipAddress).ToLower(), order.ShipAddress);
+                writer.WriteElementString(nameof(Order.ShipCity).ToLower(), order.ShipCity);
+                writer.WriteElementString(nameof(Order.ShipRegion).ToLower(), order.ShipRegion);
+                writer.WriteElementString(nameof(Order.ShipPostalCode).ToLower(), order.ShipPostalCode);
+                writer.WriteElementString(nameof(Order.ShipCountry).ToLower(), order.ShipCountry);
+                writer.WriteEndElement();
+            }
+
+            writer.WriteEndElement();
+            writer.WriteEndDocument();
+            writer.Flush();
+
+            return memoryStream;
+        }
+
+        private IEnumerable<Order> FilterOrders(string customerId, DateTime? dateFrom, DateTime? dateTo, int? take, int? skip)
         {
             var orders = _repository.GetAll().AsEnumerable();
 
@@ -42,9 +98,7 @@ namespace NorthwindApp.BLL.Services
 
             orders = skip == null ? orders : orders.Skip((int)skip);
 
-            XLWorkbook workbook = CreateExcelFile(orders.OrderBy(o => o.OrderID));
-
-            return workbook;
+            return orders;
         }
 
         private XLWorkbook CreateExcelFile(IEnumerable<Order> orders)
