@@ -1,40 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using NUnit.Framework;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
-using NUnit.Framework;
 
 namespace NorthwindApp.Tests
 {
     [TestFixture]
     class OrderReportHandlerTests
     {
-        [Test]
-        public async Task OrderReportHandler_Query_Xml()
+        [TestCase("https://localhost:44356/")]
+        [TestCase("https://localhost:44356?customer=VINET")]
+        [TestCase("https://localhost:44356?dateFrom=1996-08-01")]
+        [TestCase("https://localhost:44356?dateTo=1996-08-16")]
+        [TestCase("https://localhost:44356?take=10")]
+        [TestCase("https://localhost:44356?customer=VINET&take=10")]
+        [TestCase("https://localhost:44356?customer=VINET&skip=10")]
+        public async Task OrderReportHandler_Query_Xml(string url)
         {
-          //  string url = "https://localhost:44356/";
-          //  var httpClient = new HttpClient();
-          //  httpClient.DefaultRequestHeaders.Accept.Add( new MediaTypeWithQualityHeaderValue("text/xml"));
-          //  MemoryStream memoryStream=new MemoryStream();
-          //  FileStream file = File.Create(@"d:\qwer.xml");
+            var httpClient = new HttpClient();
 
+            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/xml"));
 
+            await httpClient.GetAsync(url);
+        }
 
-          //  var response= httpClient.GetAsync(url).Result.;
-          //  var header = response.Content;
-          //  await httpClient.GetAsync(url).Result.Content.CopyToAsync(memoryStream);
-          //  var streamWriter = new StreamWriter(memoryStream);
-          //  streamWriter.AutoFlush = true;
-          //memoryStream.Flush();
-          //  Console.SetOut(streamWriter);
+        [TestCase("https://localhost:44356/")]
+        [TestCase("https://localhost:44356?customer=VINET")]
+        [TestCase("https://localhost:44356?dateFrom=1996-08-01")]
+        [TestCase("https://localhost:44356?dateTo=1996-08-16")]
+        [TestCase("https://localhost:44356?take=10")]
+        [TestCase("https://localhost:44356?customer=VINET&take=10")]
+        [TestCase("https://localhost:44356?customer=VINET&skip=10")]
+        public async Task OrderReportHandler_Query_Excel(string url)
+        {
+            var httpClient = new HttpClient();
 
+            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"));
 
-          //  // Console.WriteLine(memoryStream);
-          //  Assert.AreEqual();
+            await httpClient.GetAsync(url);
         }
     }
 }

@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml;
-using System.Xml.Serialization;
 
 namespace NorthwindApp.BLL.Services
 {
@@ -33,13 +32,6 @@ namespace NorthwindApp.BLL.Services
         public MemoryStream GetXmlOrdersReport(string customerId, DateTime? dateFrom, DateTime? dateTo, int? take, int? skip)
         {
             IEnumerable<Order> orders = FilterOrders(customerId, dateFrom, dateTo, take, skip);
-
-            //MemoryStream stream = new MemoryStream();
-            //var formatter = new XmlSerializer(typeof(List<Order>));
-
-            //formatter.Serialize(stream, orders.ToList());
-            //return stream;
-
 
             MemoryStream memoryStream = new MemoryStream();
             XmlWriter writer = XmlWriter.Create(memoryStream);
