@@ -30,6 +30,9 @@ namespace MvcMusicStore.Controllers
         // GET: /Home/
         public async Task<ActionResult> Index()
         {
+            //LogEventInfo theEvent = new LogEventInfo(LogLevel.Info, "", "Enter to Home page");
+            //theEvent.Properties["Level"] = "Info";
+            //_logger.Log(theEvent);
             _logger.Info("Enter to Home page");
 
             counterHelper.Increment(Counters.GoToHome);

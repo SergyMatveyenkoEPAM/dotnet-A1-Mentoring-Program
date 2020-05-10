@@ -49,7 +49,7 @@ namespace MvcMusicStore
         {
             var ex = Server.GetLastError();
 
-            _logger.Error(ex.ToString());
+            _logger.Error(ex.Message);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using System;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using MvcMusicStore.Infrastructure;
@@ -103,6 +104,8 @@ namespace MvcMusicStore.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            // throw new Exception("Example of an exception");
+
             return View();
         }
 
