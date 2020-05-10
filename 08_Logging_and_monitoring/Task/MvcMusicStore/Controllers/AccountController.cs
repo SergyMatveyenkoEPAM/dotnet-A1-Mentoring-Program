@@ -1,10 +1,13 @@
-﻿using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
+using MvcMusicStore.Infrastructure;
 using MvcMusicStore.Models;
+using PerformanceCounterHelper;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
+using NLog;
 
 namespace MvcMusicStore.Controllers
 {
@@ -23,14 +26,25 @@ namespace MvcMusicStore.Controllers
 
         private UserManager<ApplicationUser> _userManager;
 
-        public AccountController()
-            : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext())))
+        private readonly ILogger _logger;
+
+        private static CounterHelper<Counters> counterHelper;
+
+        static AccountController()
         {
+            counterHelper = PerformanceHelper.CreateCounterHelper<Counters>("MvcMusicStore project");
         }
 
-        public AccountController(UserManager<ApplicationUser> userManager)
+        public AccountController(ILogger logger)
+            : this(new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext())), logger)
+        {
+            _logger = logger;
+        }
+
+        public AccountController(UserManager<ApplicationUser> userManager, ILogger logger)
         {
             _userManager = userManager;
+            _logger = logger;
         }
 
         private IAuthenticationManager AuthenticationManager
@@ -71,6 +85,8 @@ namespace MvcMusicStore.Controllers
                 if (user != null)
                 {
                     await SignInAsync(user, model.RememberMe);
+
+                    counterHelper.Increment(Counters.SuccessfulLogIn);
 
                     return RedirectToLocal(returnUrl);
                 }
@@ -318,6 +334,8 @@ namespace MvcMusicStore.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
+
+            counterHelper.Increment(Counters.SuccessfulLogOff);
 
             return RedirectToAction("Index", "Home");
         }

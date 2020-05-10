@@ -8,7 +8,9 @@ using System.Web.Routing;
 using Autofac;
 using Autofac.Integration.Mvc;
 using MvcMusicStore.Controllers;
+using MvcMusicStore.Infrastructure;
 using NLog;
+using PerformanceCounterHelper;
 
 namespace MvcMusicStore
 {
@@ -37,6 +39,10 @@ namespace MvcMusicStore
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             _logger.Info("Application started");
+
+            using (var counterHelper = PerformanceHelper.CreateCounterHelper<Counters>("Test project"))
+                counterHelper.RawValue(Counters.GoToHome, 0);
+
         }
 
         protected void Application_Error()
