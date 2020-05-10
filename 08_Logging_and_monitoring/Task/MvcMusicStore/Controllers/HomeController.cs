@@ -1,11 +1,11 @@
-﻿using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web.Mvc;
-using MvcMusicStore.Infrastructure;
+﻿using MvcMusicStore.Infrastructure;
 using MvcMusicStore.Models;
 using NLog;
 using PerformanceCounterHelper;
+using System.Data.Entity;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace MvcMusicStore.Controllers
 {
@@ -30,7 +30,7 @@ namespace MvcMusicStore.Controllers
         // GET: /Home/
         public async Task<ActionResult> Index()
         {
-            _logger.Debug("Enter to Home page");
+            _logger.Info("Enter to Home page");
 
             counterHelper.Increment(Counters.GoToHome);
 

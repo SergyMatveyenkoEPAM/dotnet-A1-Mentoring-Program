@@ -3,11 +3,11 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using MvcMusicStore.Infrastructure;
 using MvcMusicStore.Models;
+using NLog;
 using PerformanceCounterHelper;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using NLog;
 
 namespace MvcMusicStore.Controllers
 {
@@ -88,6 +88,8 @@ namespace MvcMusicStore.Controllers
 
                     counterHelper.Increment(Counters.SuccessfulLogIn);
 
+                    _logger.Debug($"{user.UserName} successfully entered");
+
                     return RedirectToLocal(returnUrl);
                 }
 
@@ -156,6 +158,7 @@ namespace MvcMusicStore.Controllers
                     ViewBag.StatusMessage = "The external login was removed.";
                     break;
                 case ManageMessageId.Error:
+                    _logger.Error($"An error has occurred. User name was {this.User?.Identity?.Name}");
                     ViewBag.StatusMessage = "An error has occurred.";
                     break;
                 default:
@@ -333,7 +336,11 @@ namespace MvcMusicStore.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
+            var currentUserName = this.User?.Identity?.Name;
+
             AuthenticationManager.SignOut();
+
+            _logger.Debug($"The user {currentUserName} exited");
 
             counterHelper.Increment(Counters.SuccessfulLogOff);
 
