@@ -1,6 +1,5 @@
 ﻿using FibonacciNumbersLibrary;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace FibonacciNumbersApp
@@ -14,6 +13,10 @@ namespace FibonacciNumbersApp
             NumbersOutput(fibonacciNumbersManager.GetFibonacciNumbers(10));
             NumbersOutput(fibonacciNumbersManager.GetFibonacciNumbers(15));
 
+            var fibonacciNumbersManager1 = new FibonacciNumbersManager(new FibonacciNumbersRedisCache());
+            NumbersOutput(fibonacciNumbersManager1.GetFibonacciNumbers(5));
+            NumbersOutput(fibonacciNumbersManager1.GetFibonacciNumbers(10));
+            NumbersOutput(fibonacciNumbersManager1.GetFibonacciNumbers(15));
         }
 
         static void NumbersOutput(IEnumerable<int> numbers)

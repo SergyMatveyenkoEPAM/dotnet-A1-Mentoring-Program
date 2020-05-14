@@ -66,12 +66,20 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="CategoriesManager.cs" />
-    <Compile Include="CategoriesMemoryCache.cs" />
-    <Compile Include="CategoriesRedisCache.cs" />
-    <Compile Include="ICategoriesCache.cs" />
+    <Compile Include="CategoriesCache\CategoriesManager.cs" />
+    <Compile Include="CategoriesCache\CategoriesMemoryCache.cs" />
+    <Compile Include="CategoriesCache\CategoriesRedisCache.cs" />
+    <Compile Include="CategoriesCache\ICategoriesCache.cs" />
     <Compile Include="CacheTests.cs" />
+    <Compile Include="EmployeesCache\EmployeesManager.cs" />
+    <Compile Include="EmployeesCache\EmployeesMemoryCache.cs" />
+    <Compile Include="EmployeesCache\EmployeesRedisCache.cs" />
+    <Compile Include="EmployeesCache\IEmployeesCache.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SuppliersCache\ISuppliersCache.cs" />
+    <Compile Include="SuppliersCache\SuppliersManager.cs" />
+    <Compile Include="SuppliersCache\SuppliersMemoryCache.cs" />
+    <Compile Include="SuppliersCache\SuppliersRedisCache.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -83,6 +91,7 @@
       <Name>NorthwindLibrary</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
