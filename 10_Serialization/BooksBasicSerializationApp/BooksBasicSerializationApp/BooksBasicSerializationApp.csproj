@@ -9,4 +9,10 @@
     <ProjectReference Include="..\BooksBasicSerializationLibrary\BooksBasicSerializationLibrary.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="books.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
