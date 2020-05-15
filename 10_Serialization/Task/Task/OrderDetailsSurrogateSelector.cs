@@ -8,7 +8,7 @@ namespace Task
     {
         private ISurrogateSelector _sel;
         public void ChainSelector(ISurrogateSelector selector)
-            => _sel = selector;
+            => _sel=selector;
 
         public ISurrogateSelector GetNextSelector()
             => _sel;

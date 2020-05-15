@@ -79,7 +79,7 @@ namespace Task.DB
             info.AddValue(nameof(ReorderLevel), ReorderLevel);
             info.AddValue(nameof(Discontinued), Discontinued);
 
-            var serializationContext = (context.Context as IObjectContextAdapter)?.ObjectContext
+            var serializationContext = (context.Context as IObjectContextAdapter)?.ObjectContext 
                                        ?? throw new Exception();
 
             serializationContext.LoadProperty(this, p => p.Supplier);

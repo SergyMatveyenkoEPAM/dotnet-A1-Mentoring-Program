@@ -1,10 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
-using System.Runtime.Serialization;
 using Task.DB;
 using Task.TestHelpers;
+using System.Runtime.Serialization;
+using System.Linq;
+using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 
 namespace Task
 {

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.CodeDom;
 using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Runtime.Serialization;
+using Task.DB;
 
 namespace Task
 {
@@ -46,18 +48,18 @@ namespace Task
             return newObj;
         }
 
-        public void GetKnownCustomDataTypes(Collection<Type> customDataTypes)
+        public void GetKnownCustomDataTypes(Collection<Type> customDataTypes) 
             => throw new NotImplementedException();
 
-        public Type GetReferencedTypeOnImport(string typeName, string typeNamespace, object customData)
+        public Type GetReferencedTypeOnImport(string typeName, string typeNamespace, object customData) 
             => throw new NotImplementedException();
 
-        public CodeTypeDeclaration ProcessImportedType(CodeTypeDeclaration typeDeclaration, CodeCompileUnit compileUnit)
+        public CodeTypeDeclaration ProcessImportedType(CodeTypeDeclaration typeDeclaration, CodeCompileUnit compileUnit) 
             => throw new NotImplementedException();
-        public object GetCustomDataToExport(MemberInfo memberInfo, Type dataContractType)
+        public object GetCustomDataToExport(MemberInfo memberInfo, Type dataContractType) 
             => throw new NotImplementedException();
 
-        public object GetCustomDataToExport(Type clrType, Type dataContractType)
+        public object GetCustomDataToExport(Type clrType, Type dataContractType) 
             => throw new NotImplementedException();
     }
 }

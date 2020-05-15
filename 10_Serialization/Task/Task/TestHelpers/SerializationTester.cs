@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Task.TestHelpers
 {
@@ -29,7 +25,8 @@ namespace Task.TestHelpers
 			if (showResult)
 			{
 				var r = Console.OutputEncoding.GetString(stream.GetBuffer(), 0, (int)stream.Length);
-				Console.WriteLine(r);
+				File.WriteAllText(@"D:\ghjkli.txt", r);
+                Console.WriteLine(r);
 			}
 
 			stream.Seek(0, SeekOrigin.Begin);
